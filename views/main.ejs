@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Dashboard</title>
+
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/sb-admin-2/sb-admin-2.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- jQuery -->
+    <script src="/javascripts/jquery.js"></script>
+    <script src="/javascripts/jquery.dataTables.min.js"></script>
+    <script src="/javascripts/dataTables.bootstrap.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="/sb-admin-2/sb-admin-2.js"></script>
+</head>
+
+<body>
+<div id="wrapper">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0;background-color: red;height: 80px">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="">Dashboard</a>
+        </div>
+        <!-- /.navbar-header -->
+
+        <ul class="nav navbar-top-links navbar-right">
+            <!-- /.dropdown -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a href="javascript:void(0);"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                    </li>
+                    <li><a href="javascript:void(0);"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li><a href="/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+        <!-- /.navbar-top-links -->
+
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav navbar-collapse">
+                <ul class="nav" id="side-menu">
+                    <!--
+                    <li class="sidebar-search">
+                        <div class="input-group custom-search-form">
+                            <input type="text" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                        </div>
+                        <!-- /input-group -->
+                    <!--</li> -->
+                    <li class="active">
+                        <a href="/admin/imageQuestion"><i class="fa fa-table fa-fw"></i> Image Questions</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="active"><i class="fa fa-table fa-fw"></i> Text Questions</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.sidebar-collapse -->
+        </div>
+        <!-- /.navbar-static-side -->
+    </nav>
+
+    <!-- Page Content -->
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Add text question & list the Text questions</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Add text question
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body uploadContainer">
+                            <form name="textQuestionForm">
+                                <table width="100%">
+                                    <tr>
+                                        <td width="20%">
+                                            <p>Please enter your text:
+                                            </p>
+                                        </td>
+                                        <td width="20%">
+                                            <p>Please enter your requirements:
+                                            </p>
+                                        </td>
+                                        <td width="20%">
+                                            <p>Choose an image file as an answer:
+                                            </p>
+                                        </td>
+                                        <td width="5%">
+                                            <p>&nbsp;&nbsp;
+                                            </p>
+                                        </td>
+                                        <td width="35%">
+                                            <p>&nbsp;&nbsp;
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                       <td width="20%">
+                                        <input id="textQuestion" name="textQuestion" type="text" class="form-control" />
+                                       </td>
+                                       <td width="20%">
+                                           <input id="requirements" name="requirements" type="text" class="form-control" />
+                                       </td>
+                                        <td width="20%">
+                                            <input id="fileData" name="fileData" type="file"/>
+                                        </td>
+                                       <td width="5%">
+                                           <input type="button" value="Upload" class="btn send-btn form-control" onclick="javascript:validateTextQuestionForm();"/>
+                                       </td>
+                                        <td width="35%">
+                                            <div style="margin-bottom: 0px;padding: 6px;" class="alertDiv alert"></div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Text questions
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body tableContainer">
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+    </div>
+    <!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+<div class="modal fade msgModalDiv" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title msgModalLabel">
+                    Please wait.
+                </h4>
+            </div>
+            <div class="modal-body msgModalText">
+                Uploading...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="okButton btn btn-default displayNone"
+                        data-dismiss="modal">OK
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div>
+</div>
+
+
+</body>
+
+</html>
