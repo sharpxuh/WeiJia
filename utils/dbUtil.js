@@ -7,7 +7,7 @@
 var mq = require("mysql");
 var logger = require("./logger");
 var util = require('util');
-var config = require("../config.js");
+var conf = require("../config.js");
 var uuid = require("node-uuid");
 var pool = null;
 var db = null;
@@ -18,7 +18,7 @@ function Table(tablename,util,fields){
     this.fields=fields;
 }
 
-//¼ì²é±í×Ö¶Î
+//ï¿½ï¿½ï¿½ï¿½ï¿½Ö¶ï¿½
 Table.prototype.checkTable=function(values){
     if(values && this.fields){
         var flag=false;
@@ -35,7 +35,7 @@ Table.prototype.checkTable=function(values){
     }
     return true;
 }
-//clear±í×Ö¶Î
+//clearï¿½ï¿½ï¿½Ö¶ï¿½
 Table.prototype.clearTable=function(values){
     if(values && this.fields){
         for(var prop in values){
@@ -84,7 +84,7 @@ Table.prototype.insert = function(values, callback) {
                 if (err) {
                     callback(err,null);
                 }else{
-                    callback(null,values["id_"]);//TODO¡¡·µ»ØÉú³É£É£Ä
+                    callback(null,values["id_"]);
                 }
                 connection.release(); //release
             });
@@ -93,7 +93,7 @@ Table.prototype.insert = function(values, callback) {
     }
 };
 
-//get_·µ»Ø¿ÕÎª´íÎó
+//get_ï¿½ï¿½ï¿½Ø¿ï¿½Îªï¿½ï¿½ï¿½ï¿½
 Table.prototype.get = function(ID, callback) {
     if(!callback){
         callback=function(){};
@@ -266,3 +266,200 @@ Table.prototype.where = function(params, callback) {
         logger.debug(query.sql);
     });
 }
+Table.prototype.where = function(params,orders, callback) {
+    if(!callback){
+        callback=function(){};
+    }
+    var sql = "select * from " + this.tablename + " where 1=1";
+    if (this.clearTable(params)) {//ï¿½ï¿½ï¿½ï¿½
+        for (var pro in params) {
+            sql += " and " + pro + "=" + this.pool.escape(params[pro]);
+        }
+    }
+    if(orders){//ï¿½ï¿½ï¿½ï¿½
+        for (var pro in orders) {
+            sql+=" order by "+pro+" " + orders[pro];
+        }
+    }
+
+    if((typeof orders == 'function') && orders.constructor == Function){
+        callback=orders;
+    }
+
+    this.getConnection(function(connection) {
+        var query = connection.query(sql, function(err, result) {
+            if (err) {
+                callback(err,result);
+            }else{
+                callback(null,result);
+            }
+            connection.release(); //release
+        });
+        logger.debug(query.sql);
+    });
+}
+Table.prototype.queryAll = function(callback) {
+    if(!callback){
+        callback=function(){};
+    }
+    var me=this;
+    this.getConnection(function(connection) {
+        var query = connection.query("select * from " + me.tablename, function(err, result) {
+            if (err) {
+                callback(err,result);
+            }else{
+                callback(null,result);
+            }
+            connection.release(); //release
+        });
+        logger.debug(query.sql);
+    });
+}
+Table.prototype.queryPage = function(page, callback) {
+    if(!callback){
+        callback=function(){};
+    }
+    var me=this;
+    this.count(function(err,result) {
+        if(err){
+            callback(err,result);
+        }else{
+            //ï¿½ï¿½ï¿½ï¿½
+            page.totalCount = result;
+            page.totalPage = Math.ceil(page.totalCount / page.pageSize);
+            //ï¿½ï¿½Ò³
+            me.getConnection(function(connection) {
+                var query = connection.query("select * from " + me.tablename + " limit " + page.start + "," + page.end + "", function(err, result) {
+                    if (err) {
+                        callback(err,page);
+                    }else{
+                        page.data = result;
+                        callback(null,page);
+                    }
+                    connection.release(); //release
+                });
+                logger.debug(query.sql);
+            });
+        }
+    });
+}
+
+Table.prototype.queryPageBySql = function(sql, page,params, callback) {
+    if(!callback){
+        callback=function(){};
+    }
+    if(params && (typeof params == 'function') && params.constructor == Function){
+        callback=params;
+    }
+
+    if ((params)) {
+        for (var i=0;i<params.length;i++) {
+            sql=sql.replace("?",this.pool.escape(params[i]));
+        }
+    }
+    var me=this;
+    this.countBySql(sql, function(err,result) {
+        if(err){
+            callback(err,result);
+        }else{
+            //ï¿½ï¿½ï¿½ï¿½
+            page.totalCount = result;
+            page.totalPage = Math.ceil(page.totalCount / page.pageSize);
+            //ï¿½ï¿½Ò³
+            me.getConnection(function(connection) {
+                var query = connection.query(  sql + "  limit " + page.start + "," + page.end + "", function(err, result) {
+                    if (err) {
+                        callback(err,result);
+                    }else{
+                        page.data = result;
+                        callback(null,page);
+                    }
+                    connection.release(); //release
+                });
+                logger.debug(query.sql);
+            });
+        }
+    });
+}
+
+Table.prototype.queryPage = function(page,params, callback) {
+    if(!callback){
+        callback=function(){};
+    }
+    var sql = "select * from " + this.tablename + " where 1=1";
+    if (this.clearTable(params)) {
+        for (var pro in params) {
+            sql += " and " + pro + "=" + this.pool.escape(params[pro]);
+        }
+    }
+    this.queryPageBySql(sql,page,callback);
+}
+
+//executeSql
+Table.prototype.executeSql = function(sql,params, callback) {
+    if(!callback){
+        callback=function(){};
+    }
+    if ((params)) {
+        for (var i=0;i<params.length;i++) {
+            sql=sql.replace("?",this.pool.escape(params[i])) ;
+        }
+    }
+    this.getConnection(function(connection) {
+        var query = connection.query(sql, function(err, result) {
+            if (err) {
+                callback(err,result);
+            }else{
+                callback(null,result);
+            }
+            connection.release(); //release
+        });
+        logger.debug(query.sql);
+    });
+}
+
+var createPool =function(){
+    if(pool == null){
+        pool = mq.createPool(conf);
+    }
+    return pool;
+}
+
+function DBUtil(){
+    this.pool = createPool();
+    this.tables = [];
+}
+
+DBUtil.prototype.define= function(table) {
+    var me=this;
+    if(util.isArray(table)){
+        table.forEach(function(r){
+            me.tables.push([r.key,new Table(r.name,me,r.fields)]);
+        });
+    }else{
+        me.tables.push([table.key,new Table(table.name,me,table.fields)]);
+    }
+};
+DBUtil.prototype.get=function(tablename){
+    if(tablename){
+        var _len=this.tables.length;
+        for(i=0;i<_len;i++){
+            if(this.tables[i][0]==tablename){
+                return  this.tables[i][1];
+            }
+        }
+    }
+    return null;
+};
+
+exports.Instance = function() {
+    if (db == null) {
+        db = new DBUtil();
+    }
+    return db;
+};
+
+var db = this.Instance();
+ var User = db.define('t_user');
+ //User.get('1', function(result) {
+ console.log(User+"");
