@@ -7,7 +7,7 @@ var house = require('../models/house');
 exports.findByIsRent = function(isRent,callback){
     house.findAll({
         where:{
-            isRent:'1',
+            isRent:isRent,
             status:'1'
         }
     }).then(function(data){

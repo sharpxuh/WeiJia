@@ -1,9 +1,12 @@
 var express = require('express');
 var router = express.Router();
-
+var houseservice = require('../service/houseservice');
 
 router.get('/rentHouse',function(req,res,next){
-  res.render('rentHouse');
+
+  houseservice.findByIsRent('1',function(result){
+    res.render('rentHouse',{data:result});
+  })
 });
 
 module.exports = router;

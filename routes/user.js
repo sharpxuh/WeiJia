@@ -19,8 +19,7 @@ router.post('/login', function(req, res, next) {
   //    }
   //  }
   //
-    console.log("11");
-
+  //  console.log("11");
     userservice.findByUsernameAndPassword(req.body.username, req.body.password, function (result) {
         if(result&&result.length>0){
             res.render('main');
