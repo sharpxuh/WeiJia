@@ -3,7 +3,6 @@
  */
 var Sequelize = require('sequelize');
 var sequelize = require("../utils/sequelize.js");
-var house = require('house');
 
 var agent = sequelize.define("agent",{
     guid:{type:Sequelize.UUIDV4,primaryKey:true,defaultValue:Sequelize.UUIDV4},
@@ -18,9 +17,5 @@ var agent = sequelize.define("agent",{
     timestamps: false,
     freezeTableName: true
 });
-
-house.belongsTo(agent);
-
-agent.belongsToMany(house);
 
 module.exports = agent;

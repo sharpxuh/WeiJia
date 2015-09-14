@@ -17,21 +17,5 @@ var user = sequelize.define("user",{
 });
 module.exports = user;
 
-//var user1 = user.build({
-//    username:'tom',
-//    password:'111111',
-//    status:'1'
-//})
-//
-//user1.save().then(function(res){
-//    console.log(res);
-//})
-//user.sync({force: true}).then(function () {
-//    // Table create
-//    return user.create({
-//        username:'john',
-//        password:'111111'
-//    })
-//});
 
 

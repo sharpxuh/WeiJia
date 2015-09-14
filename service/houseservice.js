@@ -3,6 +3,7 @@
  */
 
 var house = require('../models/house');
+var agent = require('../models/agent');
 
 exports.findByIsRent = function(isRent,callback){
     house.findAll({
