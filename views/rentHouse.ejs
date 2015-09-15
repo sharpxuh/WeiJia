@@ -405,7 +405,7 @@
                                             <th>建筑年代</th>
                                             <th>地址</th>
                                             <th>经理人</th>
-                                            <th></th>
+                                            <th style="text-align: center">操作</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -421,8 +421,9 @@
                                                    <td><%= data[i].forward %></td>
                                                    <td><%= data[i].createyear %></td>
                                                    <td><%= data[i].address %></td>
-                                                   <td></td>
-                                                   <td></td>
+                                                   <td class="center"><%= data[i].agent.name %></td>
+                                                   <td style="text-align: center"><button type="button" class="btn btn-danger" onClick="deleteHouse('<%=data[i].guid%>')">删除</button>
+                                                   <button type="button" class="btn btn-success" id="updateHouse">修改</button></td>
                                                </tr>
                                                <%}%>
                                     </tbody>
@@ -466,6 +467,17 @@
                 responsive: true
         });
     });
+
+
+    function deleteHouse(guid){
+        $.get("/house/deleteHouse",
+              {guid:guid},
+              function (data,Status){
+                    alert("1");
+        			alert(Status);
+        			alert(data);
+        	});
+    }
     </script>
 
 </body>

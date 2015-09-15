@@ -16,4 +16,14 @@ router.get('/secondHouse',function(req,res,next){
   })
 });
 
+router.get('/deleteHouse',function(req,res,next){
+  houseservice.deleteByGuid(req.query.guid,function(result){
+    if(result>0){
+      res.send({success:true});
+    }else{
+      res.send({success:false});
+    }
+  })
+});
+
 module.exports = router;
