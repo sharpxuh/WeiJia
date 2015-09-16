@@ -21,7 +21,8 @@ var house = sequelize.define("house",{
     createyear:Sequelize.STRING(10),
     desc:Sequelize.STRING(512),
     address:Sequelize.STRING(100),
-    hascarport:Sequelize.STRING(1)
+    hascarport:Sequelize.STRING(1),
+    region:Sequelize.STRING(100)
 },{
     timestamps: false,
     freezeTableName: true

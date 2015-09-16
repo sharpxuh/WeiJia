@@ -24,19 +24,6 @@ exports.findByIsRent = function(isRent,callback){
 };
 
 exports.deleteByGuid = function(guid,callback){
-    //house.find({
-    //    where:{
-    //        guid:guid,
-    //    }
-    //}).complete(function(err,data){
-    //    if(err){
-    //        console.log(err);
-    //    }else{
-    //        data.destory().success(function(err,data){
-    //
-    //        })
-    //    }
-    //})
     house.destroy({
         where: {
             guid: guid
@@ -45,3 +32,45 @@ exports.deleteByGuid = function(guid,callback){
         callback(data);
     });
 };
+
+exports.findByGuid = function(guid,callback){
+    house.findAll({
+        where:{
+            guid:guid,
+        },
+        include: [{
+            model: agent,
+            where: { guid: Sequelize.col('house.fk_agentid') }
+        }]
+    }).then(function(data){
+        callback(data);
+    }).catch(function(error){
+        console.log(error);
+    })
+}
+
+exports.updateHouseByGuid = function(guid,title,price,createyear,region,agentid,type,area,floor,address,fitment,forword,carport,desc,callback){
+    house.update({
+        title: title,
+        price:price,
+        createyear: createyear,
+        region:region,
+        agentid: agentid,
+        type:type,
+        area: area,
+        floor:floor,
+        address: address,
+        fitment:fitment,
+        forword: forword,
+        hascarport:carport,
+        desc: desc,
+    }, {
+        where: {
+            guid: guid
+        }
+    }).then(function(data){
+        callback(data);
+    }).catch(function(error){
+        console.log(error);
+    })
+}
