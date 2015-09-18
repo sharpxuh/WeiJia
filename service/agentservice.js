@@ -9,4 +9,4 @@ exports.findAll = function (callback){
             callback(data);
         }
     })
-    }
+};

@@ -9,4 +9,12 @@ exports.findByUsernameAndPassword = function (username,password,callback){
             callback(data);
         }
     })
-}
+};
+
+exports.findAllUsers = function (callback){
+    user.findAll({}).then(function(data){
+        if(callback){
+            callback(data);
+        }
+    })
+};

@@ -10,7 +10,8 @@ var user = sequelize.define("user",{
     password:Sequelize.STRING(50),
     status:Sequelize.STRING(1),
     role:Sequelize.STRING(10),
-    desc:Sequelize.STRING(200)
+    desc:Sequelize.STRING(200),
+    name:Sequelize.STRING(50)
 },{
     timestamps: false,
     freezeTableName: true
