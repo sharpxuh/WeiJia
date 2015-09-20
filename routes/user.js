@@ -28,5 +28,30 @@ router.get('/sysUser',filter.authorize,function(req,res,next){
     })
 });
 
+router.get('/deleteUser/:_id',filter.authorize, function (req, res, next) {
+    userservice.deleteByGuid(req.params._id, function (result) {
+        if (result > 0) {
+            res.send({'success': true});
+        }else{
+            res.send({'success': false});
+        }
+    })
+});
+
+router.get('/detailUser/:_id',filter.authorize, function (req, res, next) {
+    userservice.findByGuid(req.params._id, function (result) {
+        res.render('userModal',{data:result});
+    })
+});
+
+router.post('/updateUser/:_id',filter.authorize, function (req, res, next) {
+    userservice.updateUserByGuid(req.params._id,req.body.username,req.body.password,req.body.name,req.body.admin,req.body.desc,function(result){
+        if(result > 0){
+            res.send({'success': true});
+        }else{
+            res.send({'success': false});
+        }
+    })
+});
 
 module.exports = router;

@@ -30,21 +30,32 @@ router.get('/deleteHouse/:_id',filter.authorize, function (req, res, next) {
 });
 
 router.post('/updateHouse/:_id',filter.authorize, function (req, res, next) {
-    houseservice.updateHouseByGuid(req.params._id, req.body.title, req.body.price, req.body.createyear, req.body.region, req.body.agentid, req.body.type, req.body.area, req.body.floor, req.body.address, req.body.fitment, req.body.forward, req.body.carport, req.body.desc, function (result) {
-        if(result > 0){
-            res.send({'success': true});
-        }else{
-            res.send({'success': false});
-        }
-    })
+    if(req.params._id == "insert"){
+
+    }else{
+        houseservice.updateHouseByGuid(req.params._id, req.body.title, req.body.price, req.body.createyear, req.body.region, req.body.agentid, req.body.type, req.body.area, req.body.floor, req.body.address, req.body.fitment, req.body.forward, req.body.carport, req.body.desc, function (result) {
+            if(result > 0){
+                res.send({'success': true});
+            }else{
+                res.send({'success': false});
+            }
+        })
+    }
+
 });
 
 router.get('/detailHouse/:_id',filter.authorize, function (req, res, next) {
-    houseservice.findByGuid(req.params._id, function (result) {
+    if(req.params._id == "true"||req.params._id == "true"){
         agentservice.findAll(function (agents) {
-            res.render('editHouse', {data: result, agents: agents});
+            res.render('newHouseModal', {rent:req.params._id, agents: agents});
         })
-    })
+    }else {
+        houseservice.findByGuid(req.params._id, function (result) {
+            agentservice.findAll(function (agents) {
+                res.render('houseModal', {data: result, agents: agents});
+            })
+        })
+    }
 });
 
 

@@ -4,7 +4,7 @@
 
 exports.authorize = function(req, res, next) {
     if (!req.session.user) {
-        res.redirect('/user/login');
+        res.redirect('/login');
     } else {
         res.locals.user = req.session.user;
         next();

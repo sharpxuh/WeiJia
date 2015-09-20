@@ -28,9 +28,9 @@ var house = sequelize.define("house",{
     freezeTableName: true
 });
 
-house.belongsTo(agent,{foreignKey: 'fk_agentid'});
+house.belongsTo(agent,{foreignKey: 'agentid'});
 //agent.belongsToMany(House, {through: 'AgentHouse'});
-//house.sync({force: true});
-//house.create({isRent:'1',isIn:'0',status:'1',fitment:'better',price:'3000',title:'title',type:'3室一厅',floor:'11/13',area:'89',startdate:'2015-9-1',forward:'南北朝向',createyear:'2012',desc:'111111',address:'22222',agentid:'15fcccf3-f898-400f-abcb-3acbad293a1b',fk_agentid:'15fcccf3-f898-400f-abcb-3acbad293a1b'}).then(function(){});
+//house.sync({force: false});
+//house.create({isRent:'1',isIn:'0',status:'1',fitment:'better',price:'3000',title:'title',type:'3室一厅',floor:'11/13',area:'89',startdate:'2015-9-1',forward:'南北朝向',createyear:'2012',desc:'111111',address:'22222',fk_agentid:'15fcccf3-f898-400f-abcb-3acbad293a1b'}).then(function(){});
 //House.hasAgent(agent).then(function(data){console.log(data)});
 module.exports = house;

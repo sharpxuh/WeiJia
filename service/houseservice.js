@@ -13,8 +13,7 @@ exports.findByIsRent = function(isRent,callback){
             status:'1'
         },
         include: [{
-            model: agent,
-            where: { guid: Sequelize.col('house.fk_agentid') }
+            model: agent
         }]
     }).then(function(data){
         callback(data);
@@ -23,8 +22,20 @@ exports.findByIsRent = function(isRent,callback){
     })
 };
 
+//exports.deleteByGuid = function(guid,callback){
+//    house.destroy({
+//        where: {
+//            guid: guid
+//        }
+//    }).then(function(data){
+//        callback(data);
+//    });
+//};
+
 exports.deleteByGuid = function(guid,callback){
-    house.destroy({
+    house.update({
+       status:"0"
+    },{
         where: {
             guid: guid
         }
@@ -33,21 +44,21 @@ exports.deleteByGuid = function(guid,callback){
     });
 };
 
+
 exports.findByGuid = function(guid,callback){
     house.findAll({
         where:{
             guid:guid,
         },
         include: [{
-            model: agent,
-            where: { guid: Sequelize.col('house.fk_agentid') }
+            model: agent
         }]
     }).then(function(data){
         callback(data);
     }).catch(function(error){
         console.log(error);
     })
-}
+};
 
 exports.updateHouseByGuid = function(guid,title,price,createyear,region,agentid,type,area,floor,address,fitment,forword,carport,desc,callback){
     house.update({
@@ -72,5 +83,14 @@ exports.updateHouseByGuid = function(guid,title,price,createyear,region,agentid,
         callback(data);
     }).catch(function(error){
         console.log(error);
+    })
+};
+
+exports.insertHouse = function(title,price,createyear,region,agentid,type,area,floor,address,fitment,forword,carport,desc,callback){
+    house.create({ username: 'barfooz', isAdmin: true }, { fields: [ 'username' ] }).then(function(user) {
+        // let's assume the default of isAdmin is false:
+        console.log(user.get({
+            plain: true
+        })) // => { username: 'barfooz', isAdmin: false }
     })
 }

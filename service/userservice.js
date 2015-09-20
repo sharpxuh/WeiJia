@@ -11,10 +11,52 @@ exports.findByUsernameAndPassword = function (username,password,callback){
     })
 };
 
-exports.findAllUsers = function (callback){
-    user.findAll({}).then(function(data){
+exports.findByGuid = function (guid,callback){
+    user.findAll({where:{guid:guid}}).then(function(data){
         if(callback){
             callback(data);
         }
+    })
+};
+
+exports.findAllUsers = function (callback){
+    user.findAll({
+        where:{
+            status:'1'
+        },
+    }).then(function(data){
+        if(callback){
+            callback(data);
+        }
+    })
+};
+
+exports.deleteByGuid = function(guid,callback){
+    user.update({
+        status:"0"
+    },{
+        where: {
+            guid: guid
+        }
+    }).then(function(data){
+        callback(data);
+    });
+};
+
+exports.updateUserByGuid = function(guid,username,password,name,admin,desc,callback){
+    user.update({
+        username: username,
+        password:password,
+        name: name,
+        role:admin,
+        desc: desc
+    }, {
+        where: {
+            guid: guid
+        }
+    }).then(function(data){
+        callback(data);
+    }).catch(function(error){
+        console.log(error);
     })
 };
