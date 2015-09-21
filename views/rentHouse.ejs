@@ -418,8 +418,8 @@
                                                    <td><%= data[i].type %></td>
                                                    <td><%= data[i].area %></td>
                                                    <td><%= data[i].floor %></td>
-                                                   <td><%= data[i].fitment %></td>
-                                                   <td><%= data[i].forward %></td>
+                                                   <td><%if(data[i].fitment=="0"){%>毛坯<%}%><%if(data[i].fitment=="1"){%>简装<%}%><%if(data[i].fitment=="2"){%>精装<%}%><%if(data[i].fitment=="3"){%>豪华装修<%}%></td>
+                                                   <td><%if(data[i].forward=="0"){%>南北朝向<%}%><%if(data[i].forward=="1"){%>非南北朝向<%}%></td>
                                                    <td><%= data[i].createyear %></td>
                                                    <td><%= data[i].address %></td>
                                                    <td class="center"><%= data[i].agent.name %></td>
@@ -513,11 +513,11 @@
                  data:formData,
                  success: function(data){
          			if(data.success==true){
-         				alert("修改成功！");
+         				alert("操作成功！");
          				$('#myModal').modal('hide');
          				 window.location.reload();
          			}else{
-         				alert("修改失败！");
+         				alert("操作失败！");
          			}
                  }
                  });

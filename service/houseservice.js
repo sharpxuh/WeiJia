@@ -60,7 +60,7 @@ exports.findByGuid = function(guid,callback){
     })
 };
 
-exports.updateHouseByGuid = function(guid,title,price,createyear,region,agentid,type,area,floor,address,fitment,forword,carport,desc,callback){
+exports.updateHouseByGuid = function(guid,title,price,createyear,region,agentid,type,area,floor,address,fitment,forward,carport,desc,callback){
     house.update({
         title: title,
         price:price,
@@ -72,7 +72,7 @@ exports.updateHouseByGuid = function(guid,title,price,createyear,region,agentid,
         floor:floor,
         address: address,
         fitment:fitment,
-        forword: forword,
+        forward: forward,
         hascarport:carport,
         desc: desc,
     }, {
@@ -86,11 +86,10 @@ exports.updateHouseByGuid = function(guid,title,price,createyear,region,agentid,
     })
 };
 
-exports.insertHouse = function(title,price,createyear,region,agentid,type,area,floor,address,fitment,forword,carport,desc,callback){
-    house.create({ username: 'barfooz', isAdmin: true }, { fields: [ 'username' ] }).then(function(user) {
-        // let's assume the default of isAdmin is false:
-        console.log(user.get({
-            plain: true
-        })) // => { username: 'barfooz', isAdmin: false }
+exports.insertHouse = function(isrent,isin,title,price,createyear,region,agentid,type,area,floor,address,fitment,forward,carport,desc,callback){
+    house.create({isRent:isrent,isIn:isin,status:"1",title: title, price: price,createyear:createyear,region:region,agentid:agentid,type:type,area:area,floor:floor,address:address,fitment:fitment,forward:forward,carport:carport,desc:desc}).then(function(data) {
+        callback(data);
+    }).catch(function(error){
+        console.log(error);
     })
 }

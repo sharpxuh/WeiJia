@@ -39,19 +39,33 @@ router.get('/deleteUser/:_id',filter.authorize, function (req, res, next) {
 });
 
 router.get('/detailUser/:_id',filter.authorize, function (req, res, next) {
-    userservice.findByGuid(req.params._id, function (result) {
-        res.render('userModal',{data:result});
-    })
+    if(req.params._id=="new"){
+        res.render('newUserModal');
+    }else{
+        userservice.findByGuid(req.params._id, function (result) {
+            res.render('userModal',{data:result});
+        })
+    }
 });
 
 router.post('/updateUser/:_id',filter.authorize, function (req, res, next) {
-    userservice.updateUserByGuid(req.params._id,req.body.username,req.body.password,req.body.name,req.body.admin,req.body.desc,function(result){
-        if(result > 0){
-            res.send({'success': true});
-        }else{
-            res.send({'success': false});
-        }
-    })
+    if(req.params._id == "new"){
+        userservice.insertUser(req.body.username,req.body.password,req.body.name,req.body.admin,req.body.desc,function(result){
+            if(result){
+                res.send({'success': true});
+            }else{
+                res.send({'success': false});
+            }
+        })
+    }else{
+        userservice.updateUserByGuid(req.params._id,req.body.username,req.body.password,req.body.name,req.body.admin,req.body.desc,function(result){
+            if(result > 0){
+                res.send({'success': true});
+            }else{
+                res.send({'success': false});
+            }
+        })
+    }
 });
 
 module.exports = router;

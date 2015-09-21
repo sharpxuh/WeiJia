@@ -3,15 +3,26 @@
 	<h4>新增<% if(rent == 'true'){%>租赁房<%}%><% if(rent == 'false'){%>二手房<%}%>信息</h4>
 </div>
 <div class="modal-body" >
-
-        									<div class="form-group">
+											<div class="form-group">
         										<label>标题</label>
-        										<input class="form-control"  name="title">
+        										<input class="form-control"  name="title" >
         									</div>
         									<div class="form-group">
         										<label>价格</label>
-        										<input class="form-control"  name="price" >
+        										<input class="form-control"  name="price">
         									</div>
+ 											<div class="form-group">
+         										<label>户型</label>
+         										<input class="form-control"  name="type">
+         									</div>
+ 											<div class="form-group">
+          										<label>楼层</label>
+          										<input class="form-control"  name="floor">
+          									</div>
+											<div class="form-group">
+          										<label>面积</label>
+          										<input class="form-control"  name="area">
+          									</div>
         									<div class="form-group">
         										<label>建筑年代</label>
         										<input class="form-control" name="createyear" >
@@ -20,7 +31,11 @@
         										<label>区域</label>
         										<input class="form-control" name="region" >
         									</div>
-        									<div class="form-group">
+  											<div class="form-group">
+           										<label>地址</label>
+           										<input class="form-control"  name="address">
+           									</div>
+           									<div class="form-group">
         										<label>经理人</label>
         										<select class="form-control" name="agentid" id="agentid">
         											<% for(var i=0; i<agents.length;i++){%>
@@ -66,7 +81,7 @@
         										<textarea class="form-control" rows="6" name="desc"></textarea>
         									</div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-primary" onclick="formSubmit('insert')">保存</button>
+    <button type="button" class="btn btn-primary" onclick="formSubmit('<%=rent%>')">保存</button>
     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 </div>
 </form>

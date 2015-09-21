@@ -30,9 +30,24 @@ router.get('/deleteHouse/:_id',filter.authorize, function (req, res, next) {
 });
 
 router.post('/updateHouse/:_id',filter.authorize, function (req, res, next) {
-    if(req.params._id == "insert"){
-
-    }else{
+    if(req.params._id == "true"){
+        houseservice.insertHouse("1","1",req.body.title, req.body.price, req.body.createyear, req.body.region, req.body.agentid, req.body.type, req.body.area, req.body.floor, req.body.address, req.body.fitment, req.body.forward, req.body.carport, req.body.desc,function(result){
+            if(result){
+                res.send({'success': true});
+            }else{
+                res.send({'success': false});
+            }
+        })
+    }
+   else if(req.params._id == "false"){
+        houseservice.insertHouse("0","1",req.body.title, req.body.price, req.body.createyear, req.body.region, req.body.agentid, req.body.type, req.body.area, req.body.floor, req.body.address, req.body.fitment, req.body.forward, req.body.carport, req.body.desc,function(result){
+            if(result > 0){
+                res.send({'success': true});
+            }else{
+                res.send({'success': false});
+            }
+        })
+    } else{
         houseservice.updateHouseByGuid(req.params._id, req.body.title, req.body.price, req.body.createyear, req.body.region, req.body.agentid, req.body.type, req.body.area, req.body.floor, req.body.address, req.body.fitment, req.body.forward, req.body.carport, req.body.desc, function (result) {
             if(result > 0){
                 res.send({'success': true});

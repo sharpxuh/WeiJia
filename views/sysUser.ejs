@@ -148,6 +148,14 @@
     <div id="page-wrapper" >
         <div class="row">
                     <div class="col-lg-12">
+                        <h1 class="page-header">用户管理</h1>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /.row -->
+                    <button type="button" class="btn btn-primary" onclick="show('new')">新增用户</button>
+        <div class="row">
+                    <div class="col-lg-12">
                                             <div class="panel panel-default">
                                                 <div class="panel-heading">
                                                     <b>系统用户</b>
@@ -262,11 +270,11 @@
             data:formData,
             success: function(data){
     			if(data.success==true){
-    				alert("修改成功！");
+    				alert("操作成功！");
     				$('#myModal').modal('hide');
     				 window.location.reload();
     			}else{
-    				alert("修改失败！");
+    				alert("操作失败！");
     			}
             }
             });

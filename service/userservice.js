@@ -60,3 +60,11 @@ exports.updateUserByGuid = function(guid,username,password,name,admin,desc,callb
         console.log(error);
     })
 };
+
+exports.insertUser = function(username,password,name,admin,desc,callback){
+    user.create({status:"1",username:username,password:password,name:name,role:admin,desc:desc}).then(function(data) {
+        callback(data);
+    }).catch(function(error){
+        console.log(error);
+    })
+}
