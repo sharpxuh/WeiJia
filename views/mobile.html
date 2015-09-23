@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>ListAPP</title>
+</head>
+<body>
+<div data-role="page" id="photos">
+    <header data-role="header">
+        <h1>My Photos</h1>
+    </header>
+    <article data-role="content">
+        <ul data-role="listview" data-filter="true">
+            <li>
+                <a href="#">
+                    <h1>Miniature Doberman Pincher</h1>
+                    <img src="/images/a.jpg" alt="Min Pin" />
+                    <p>This is what happens when a
+                        friend brings a dog to the studio.</p>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <h1>Gummy Bears</h1>
+                    <img src="/images/b.jpg" alt="Gummy Bears" />
+                    <p>Three different poster boards...mirror for reflection,
+                        black for background white for highlights</p>
+                </a>
+            </li>
+        </ul>
+    </article>
+    <footer data-role="footer" data-position="fixed">
+        <nav data-role="navbar">
+            <ul>
+                <li><a href="#" data-icon="home">Home</a></li>
+                <li><a href="#" data-icon="grid">Photos</a></li>
+                <li><a href="#" data-icon="info">Info</a></li>
+            </ul>
+        </nav>
+    </footer>
+    </div>
+</body>
+
+</html>
