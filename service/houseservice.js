@@ -14,7 +14,9 @@ exports.findByIsRent = function(isRent,callback){
         },
         include: [{
             model: agent
-        }]
+        }
+    ],
+        order:[['createtime', 'DESC']]
     }).then(function(data){
         callback(data);
     }).catch(function(error){
