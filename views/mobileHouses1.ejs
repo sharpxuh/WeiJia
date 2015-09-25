@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<link href="/stylesheets/swipebox.min.css" rel="stylesheet"  />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script src="/javascripts/jquery.swipebox.min.js"></script>
+<style>
+.ui-bar-f
+{
+color:white;
+background-color:#D00000;
+}
+</style>
+<head>
+    <meta charset="UTF-8">
+    <title>ListAPP</title>
+</head>
+<body>
+<div data-role="page" id="photos">
+    <header data-role="header" data-theme="f">
+        <h1>房源信息-<%if(rent==true){%>租房<%}%></h1>
+    </header>
+    <article data-role="content">
+    <div class="ui-grid-b">
+                  <div class="ui-block-a">
+                    <select name="price" id="price">
+                        <option value="">价格</option>
+                        <option value="0">3000以下</option>
+                        <option value="1">3000以上</option>
+                    </select>
+                  </div>
+                  <div class="ui-block-b">
+                    <select name="area" id="area">
+                        <option value="">户型</option>
+                        <option value="0">75以下</option>
+                        <option value="1">75~100平</option>
+                        <option value="2">100平以上</option>
+                    </select>
+                  </div>
+                  <div class="ui-block-c">
+                    <select name="region" id="region">
+                        <option value="">区域</option>
+                        <option value="0">工业园区</option>
+                        <option value="1">相城区</option>
+                        <option value="2">姑苏区</option>
+                    </select>
+                  </div>
+                </div>
+        <ul data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="楼盘/区域">
+
+            <li data-role="list-divider" data-theme="f">精选房源</li>
+             <% for(var i=0; i<data.length;i++){%>
+            <li >
+                <a href="#detailHouse">
+                    <img src="/images/a.jpg" style="padding:12px 0 12px 10px" />
+                    <div style="float:left">
+                        <h3><%=data[i].title%></h3>
+                        <p><%=data[i].type%>  <%if(data[i].fitment=="0"){%>毛坯<%}%><%if(data[i].fitment=="1"){%>简装<%}%><%if(data[i].fitment=="2"){%>精装<%}%><%if(data[i].fitment=="3"){%>豪华装修<%}%></p>
+                        <p><%=data[i].region%></p>
+                    </div>
+                    <div style="float:right;padding-top: 24px;padding-bottom: 24px;padding-right: 24px;">
+                        <h3><%=data[i].price%></h3>
+                    </div>
+                </a>
+            </li>
+            <%}%>
+        </ul>
+    </article>
+    </div>
+
+
+
+    <div data-role="page" id="detailHouse">
+       <header data-role="header" data-theme="f">
+       <a href="#" data-role="button" data-rel="back" data-icon="back" data-iconpos="notext">返回</a>
+               <h1>详细信息</h1>
+       </header>
+       <div data-role="content" style="text-align :center">
+          <img src="/images/01.jpg" alt="image" id="gallery">
+           <div class="ui-grid-b">
+                            <div class="ui-block-a">
+                            </div>
+                            <div class="ui-block-b">
+                                <a href="#" data-role="button">预约</a>
+                            </div>
+           </div>
+	   </div>
+	</div>
+
+
+    <script type="text/javascript">
+        $( '#gallery' ).click( function( e ) {
+        	e.preventDefault();
+        	$.swipebox( [
+        		{ href:'/images/01.jpg', title:'My Caption' },
+        		{ href:'/images/02.jpg', title:'My Second Caption' },
+        		{ href:'/images/02.jpg', title:'My Second Caption' },
+        		{ href:'/images/02.jpg', title:'My Second Caption' }
+        	] );
+        } );
+        jQuery(function($) {
+            $(".swipebox").swipebox({
+                useCSS : true,
+                hideCloseButtonOnMobile : false
+            });
+        });
+
+        $('#photos').on('click', function() {
+                    $.mobile.changePage("#detailHouse",{d:"111"});
+                });
+    </script>
+</body>
+
+
+</html>

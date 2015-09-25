@@ -60,7 +60,7 @@ router.post('/updateHouse/:_id',filter.authorize, function (req, res, next) {
 });
 
 router.get('/detailHouse/:_id',filter.authorize, function (req, res, next) {
-    if(req.params._id == "true"||req.params._id == "true"){
+    if(req.params._id == "true"||req.params._id == "false"){
         agentservice.findAll(function (agents) {
             res.render('newHouseModal', {rent:req.params._id, agents: agents});
         })
