@@ -5,7 +5,13 @@
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 <script src="/javascripts/jquery.swipebox.min.js"></script>
-
+<style>
+.ui-bar-f
+{
+color:white;
+background-color:#D00000;
+}
+</style>
 <head>
     <meta charset="UTF-8">
     <title>ListAPP</title>
@@ -14,17 +20,17 @@
     <div data-role="page" id="detailHouse">
        <header data-role="header" data-theme="f">
        <a href="#" data-role="button" data-rel="back" data-icon="back" data-iconpos="notext">返回</a>
-               <h1>data[0].title</h1>
+               <h1><%=data[0].title%></h1>
        </header>
        <div data-role="content" style="text-align :center">
           <img src="/images/01.jpg" alt="image" id="gallery">
            <div class="ui-grid-b">
                             <div class="ui-block-a">
-                                <%=data[i].type%>
                             </div>
                             <div class="ui-block-b">
                                 <a href="#" data-role="button">预约</a>
                             </div>
+                            <input type="text" name="fname" id="fname" value=<%=data[0].guid%>>
            </div>
 	   </div>
 	</div>
@@ -35,7 +41,6 @@
         	e.preventDefault();
         	$.swipebox( [
         		{ href:'/images/01.jpg', title:'My Caption' },
-
         		{ href:'/images/02.jpg', title:'My Second Caption' },
         		{ href:'/images/02.jpg', title:'My Second Caption' },
         		{ href:'/images/02.jpg', title:'My Second Caption' }
