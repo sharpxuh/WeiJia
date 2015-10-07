@@ -95,6 +95,8 @@ background-color:#D00000;
             $.each(photourl,function(){
                 if(this!=""){
                      msg.push({ href:'/upload/'+this,title:'' })
+                }else{
+                    msg.push({ href:'/images/b.jpg',title:'暂时无照片' });
                 }
             })
         	$.swipebox(msg);

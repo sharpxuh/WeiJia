@@ -4,7 +4,7 @@
 var Sequelize = require('sequelize');
 var sequelize = require("../utils/sequelize.js");
 
-var agent = sequelize.define("agent",{
+var agent = sequelize.define("agents",{
     guid:{type:Sequelize.UUID,primaryKey:true,defaultValue:Sequelize.UUIDV4},
     name:Sequelize.STRING(50),
     sex:Sequelize.STRING(2),
