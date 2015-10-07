@@ -5,7 +5,7 @@ var agentservice = require('../service/agentservice');
 var filter = require("../utils/filter");
 
 /* GET users listing. */
-router.post('/login', function(req, res, next) {
+router.post('/login',function(req, res, next) {
     userservice.findByUsernameAndPassword(req.body.username, req.body.password, function (result) {
         if(result&&result.length>0){
             req.session.user=result;
@@ -114,4 +114,21 @@ router.post('/updateAgent/:_id',filter.authorize, function (req, res, next) {
         })
     }
 });
+
+router.get('/recruit',filter.authorize,function(req,res,next){
+    userservice.findRecruit(function(result){
+        res.render('recruit',{data:result});
+    })
+});
+
+router.post('/updateRecruit/:_id',filter.authorize, function (req, res, next) {
+        userservice.updateRecruitByGuid(req.params._id,req.query.duty,req.query.require,req.query.number,function(result){
+            if(result){
+                res.send({'success': true});
+            }else{
+                res.send({'success': false});
+            }
+        })
+});
+
 module.exports = router;

@@ -16,16 +16,16 @@ var order = sequelize.define("order",{
     floor:Sequelize.STRING(10),
     area:Sequelize.STRING(10),
     photourl:Sequelize.STRING(400),
-    desc:Sequelize.STRING(200)
+    status:Sequelize.STRING(1),
+    desc:Sequelize.STRING(200),
+    createtime:Sequelize.DATE
 },{
     timestamps: false,
     freezeTableName: true
 });
 
-order.hasOne(typelist,{foreignKey: 'typeid'});
+order.belongsTo(typelist,{foreignKey: 'type'});
 //order.sync({force: true});
-//user.create({username:'tom',password:'123456'}).then(function(){});
-
 module.exports = order;
 
 

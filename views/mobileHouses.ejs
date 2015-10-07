@@ -52,7 +52,7 @@ background-color:#D00000;
              <% for(var i=0; i<data.length;i++){%>
             <li onclick="houseDetail('<%=data[i].guid%>')">
                 <a >
-                    <img src="/upload/<%=(data[i].photourl).split(";")[0]%>" style="padding:12px 0 12px 10px" alt="image" id="gallery" onerror="this.src='/images/b.jpg'">
+                    <img src="/upload/<%=(data[i].photourl).split(";")[0]%>" style="padding:12px 0 12px 10px;width:80px;height:80px" alt="image" id="gallery" onerror="this.src='/images/b.jpg'">
                     <div style="float:left">
                         <h3><%=data[i].title%></h3>
                         <p><%=data[i].type%>  <%if(data[i].fitment=="0"){%>毛坯<%}%><%if(data[i].fitment=="1"){%>简装<%}%><%if(data[i].fitment=="2"){%>精装<%}%><%if(data[i].fitment=="3"){%>豪华装修<%}%></p>

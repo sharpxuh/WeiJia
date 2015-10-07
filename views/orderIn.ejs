@@ -10,7 +10,7 @@
     <meta name="author" content="">
 
     <title>唯佳房产</title>
- <link href="/stylesheets/swipebox.min.css" rel="stylesheet"  />
+
     <!-- Bootstrap Core CSS -->
     <link href="/startbootstrap-sb-admin-2-1.0.5/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -147,18 +147,17 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">房源信息</h1>
+                <h1 class="page-header">预约信息</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
         <!-- /.row -->
-        <button type="button" class="btn btn-primary" onclick="editHouse('<%=rent%>')">新增房源</button>
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <% if(rent==true) {%> <b>租赁房源</b><%}%>
-                        <% if(rent==false) {%> <b>二手房源</b><%}%>
+                        <% if(rent==true) {%> <b>租房预约</b><%}%>
+                        <% if(rent==false) {%> <b>买房预约</b><%}%>
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -167,17 +166,9 @@
                                 <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>标题</th>
-                                    <th>价格</th>
-                                    <th>户型</th>
-                                    <th>面积</th>
-                                    <th>楼层</th>
-                                    <th>装修情况</th>
-                                    <th>房源朝向</th>
-                                    <th>建筑年代</th>
-                                    <th>地址</th>
-                                    <th>经理人</th>
-                                    <th>照片</th>
+                                    <th>姓名</th>
+                                    <th>联系电话</th>
+                                    <th>对房屋要求</th>
                                     <th style="text-align: center">操作</th>
                                 </tr>
                                 </thead>
@@ -185,20 +176,10 @@
                                 <% for(var i=0; i< data.length;i++){%>
                                 <tr>
                                 <td><%=i+1%></td>
-                                <td><%= data[i].title %></td>
-                                <td><%= data[i].price %></td>
-                                <td><%if(data[i].typelist!=null){%><%= data[i].typelist.label %><%}%></td>
-                                <td><%= data[i].area %></td>
-                                <td><%= data[i].floor %></td>
-                                <td><%if(data[i].fitment=="0"){%>毛坯<%}%><%if(data[i].fitment=="1"){%>简装<%}%><%if(data[i].fitment=="2"){%>精装<%}%><%if(data[i].fitment=="3"){%>豪华装修<%}%></td>
-                                <td><%if(data[i].forward=="0"){%>南北朝向<%}%><%if(data[i].forward=="1"){%>非南北朝向<%}%></td>
-                                <td><%= data[i].createyear %></td>
-                                <td><%= data[i].address %></td>
-                                <td class="center"><%if(data[i].agent!=null){%><%= data[i].agent.name %><%}%></td>
-                                <td><img src="/upload/<%=(data[i].photourl).split(';')[0]%>" style="width:50px;height:50px" alt="image" id="gallery" onerror="this.src='/images/b.jpg'" onclick="showPic('<%=(data[i].photourl)%>')"></td>
-                                <td style="text-align: center"><button type="button" class="btn btn-danger" onClick="deleteHouse('<%=data[i].guid%>')">删除</button>
-                                    <button type="button" class="btn btn-success" onClick="editHouse('<%=data[i].guid%>')" >修改</button>
-                                    <button type="file" class="btn btn-warning" onClick="upload('<%=data[i].guid%>')" >上传</button>
+                                <td><%= data[i].name %></td>
+                                <td><%= data[i].tel %></td>
+                                <td><%= data[i].desc %></td>
+                                <td style="text-align: center"><button type="button" class="btn btn-danger" onClick="deleteOrder('<%=data[i].guid%>')">删除</button>
                                 </td>
                                 </tr>
                                 <%}%>
@@ -216,15 +197,6 @@
         <!-- /.row -->
     </div>
     <!-- /#page-wrapper -->
-
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-         aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal -->
-</div>
     </div>
         <!-- /#wrapper -->
 
@@ -247,7 +219,7 @@
         <!-- fnReloadAjax -->
         <!-- <script src="http://cdn.datatables.net/plug-ins/1.10.9/api/fnReloadAjax.js"></script>-->
 
-        <script src="/javascripts/jquery.swipebox.min.js"></script>
+
         <script src="/javascripts/jquery-form.js"></script>
 
         <!-- Page-Level Demo Scripts - Tables - Use for reference -->
@@ -260,10 +232,10 @@
             });
 
 
-            function deleteHouse(guid){
+            function deleteOrder(guid){
                 $.ajax({
                     type: "get",
-                    url: "/house/deleteHouse/"+guid,
+                    url: "/order/deleteOrder/"+guid,
                     dataType: "json",
                     success: function(data){
                         if(data.success == true){
@@ -275,71 +247,6 @@
                 });
             }
 
-            function upload(guid){
-                $('#myModal').modal({remote:'/house/upload/'+guid,backdrop:false}).on("hidden.bs.modal", function () {
-                    $(this).removeData("bs.modal");
-                });
-            }
-
-            function uploadFiles(guid){
-                $("#uploadForm").ajaxSubmit({
-                    url : "/house/uploadfiles/"+guid, // 请求的url
-                    type : "post", // 请求方式
-                    dataType : "json",
-                    success : function(data){
-                        alert("上传成功！");
-                        $('#myModal').modal('hide');
-                         window.location.reload();
-                    },
-                    error : function(){
-                        alert("数据加载失败！");
-                    }
-                })
-                }
-
-                function editHouse(guid){
-                    $('#myModal').modal({remote:'/house/detailHouse/'+guid,backdrop:false}).on("hidden.bs.modal", function () {
-                        $(this).removeData("bs.modal");
-                    });
-                }
-
-                function formSubmit(guid){
-                    var formData=$("#houseForm").serialize();
-                    $.ajax({
-                        type: "POST",
-                        url: "/house/updateHouse/"+guid,
-                        processData:true,
-                        data:formData,
-                        success: function(data){
-                            if(data.success==true){
-                                alert("操作成功！");
-                                $('#myModal').modal('hide');
-                                window.location.reload();
-                            }else{
-                                alert("操作失败！");
-                            }
-                        }
-                    });
-                };
-
-                function showPic(photourl) {
-                        var photourl =photourl.split(";");
-                        var msg = [];
-                        $.each(photourl,function(){
-                            if(this!=""){
-                                msg.push({ href:'/upload/'+this,title:'' })
-                            }else{
-                                msg.push({ href:'/images/b.jpg',title:'暂时无照片' });
-                            }
-                        })
-                        $.swipebox(msg);
-                    };
-                    jQuery(function($) {
-                        $(".swipebox").swipebox({
-                            useCSS : true,
-                            hideCloseButtonOnMobile : false
-                        });
-                    });
         </script>
 </body>
 

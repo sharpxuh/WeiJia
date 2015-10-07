@@ -1,102 +1,103 @@
 <form role="form" method="post" id="houseForm">
-<div class="modal-header">
-	<h4>修改<% if(data[0].isRent == '1'){%>租赁房<%}%><% if(data[0].isRent == '0'){%>二手房<%}%>信息</h4>
-</div>
-<div class="modal-body" >
+    <div class="modal-header">
+        <h4>修改<% if(data[0].isRent == '1'){%>租赁房<%}%><% if(data[0].isRent == '0'){%>二手房<%}%>信息</h4>
+    </div>
+    <div class="modal-body" >
 
-        									<div class="form-group">
-        										<label>标题</label>
-        										<input class="form-control"  name="title" value=<%=data[0].title%>>
-        									</div>
-        									<div class="form-group">
-        										<label>价格</label>
-        										<input class="form-control"  name="price" value=<%=data[0].price%>>
-        									</div>
-											<div class="form-group">
-        										<label>户型</label>
-        										<select class="form-control" name="type" id="type">
-        											<% for(var i=0; i<typelist.length;i++){%>
-        											<%if(data[0].type==typelist[i].typeid){%>
-        											<option value=<%=typelist[i].typeid%> selected="selected"><%=typelist[i].label%></option>
-        											<%}%>
-													<%if(data[0].type!=typelist[i].typeid){%>
-        											<option value=<%=typelist[i].typeid%>><%=typelist[i].label%></option>
-        											<%}%>
-        											<%}%>
-        										</select>
-        									</div>
- 											<div class="form-group">
-          										<label>楼层</label>
-          										<input class="form-control"  name="floor" value=<%=data[0].floor%>>
-          									</div>
-											<div class="form-group">
-          										<label>面积</label>
-          										<input class="form-control"  name="area" value=<%=data[0].area%>>
-          									</div>
-        									<div class="form-group">
-        										<label>建筑年代</label>
-        										<input class="form-control" name="createyear" value=<%=data[0].createyear%>>
-        									</div>
-        									<div class="form-group">
-        										<label>区域</label>
-        										<input class="form-control" name="region" value=<%=data[0].region%>>
-        									</div>
-  											<div class="form-group">
-           										<label>地址</label>
-           										<input class="form-control"  name="address" value=<%=data[0].address%>>
-           									</div>
-        									<div class="form-group">
-        										<label>经理人</label>
-        										<select class="form-control" name="agentid" id="agentid">
-        											<% for(var i=0; i<agents.length;i++){%>
-        											<%if(data[0].fk_agentid==agents[i].guid){%>
-        											<option value=<%=agents[i].guid%> selected="selected"><%=agents[i].name%></option>
-        											<%}%>
-        											<%if(data[0].fk_agentid!=agents[i].guid){%>
-        											<option value=<%=agents[i].guid%>><%=agents[i].name%></option>
-        											<%}%>
-        											<%}%>
-        										</select>
-        									</div>
-        									<div class="form-group">
-        										<label>装修情况：</label>
-        										<label class="radio-inline">
-        											<input type="radio" name="fitment" id="fitment1" value="0" <%if(data[0].fitment=='0'){%>checked<%}%> >毛坯
-        										</label>
-        										<label class="radio-inline">
-        											<input type="radio" name="fitment" id="fitment2" value="1" <%if(data[0].fitment=='1'){%>checked<%}%> >简装
-        										</label>
-        										<label class="radio-inline">
-        											<input type="radio" name="fitment" id="fitment3" value="2" <%if(data[0].fitment=='2'){%>checked<%}%> >精装
-        										</label>
-        										<label class="radio-inline">
-        											<input type="radio" name="fitment" id="fitment4" value="3" <%if(data[0].fitment=='3'){%>checked<%}%> >豪华装修
-        										</label>
-        									</div>
-        									<div class="form-group">
-        										<label>房源朝向：</label>
-        										<label class="radio-inline">
-        											<input type="radio" name="forward" id="forward1" value="0" <%if(data[0].forward=='0'){%>checked<%}%> >南北朝向
-        										</label>
-        										<label class="radio-inline">
-        											<input type="radio" name="forward" id="forward2" value="1" <%if(data[0].forward=='1'){%>checked<%}%> >东西朝向
-        										</label>
-        									</div>
-        									<div class="form-group">
-        										<label>有无车库：</label>
-        										<label class="radio-inline">
-        											<input type="radio" name="carport" id="carport1" value="1" <%if(data[0].hascarport=='1'){%>checked<%}%>>有
-        										</label>
-        										<label class="radio-inline">
-        											<input type="radio" name="carport" id="carport2" value="0" <%if(data[0].hascarport=='0'){%>checked<%}%>>无
-        										</label>
-        									</div>
-        									<div class="form-group">
-        										<label>描述</label>
-        										<textarea class="form-control" rows="6" name="desc"><%=data[0].desc%></textarea>
-        									</div>
-<div class="modal-footer">
-    <button type="button" class="btn btn-primary" onclick="formSubmit('<%=data[0].guid%>')">保存</button>
-    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-</div>
+        <div class="form-group">
+            <label>标题</label>
+            <input class="form-control"  name="title" value=<%=data[0].title%>>
+        </div>
+        <div class="form-group">
+            <label>价格</label>
+            <input class="form-control"  name="price" value=<%=data[0].price%>>
+        </div>
+        <div class="form-group">
+            <label>户型</label>
+            <select class="form-control" name="type" id="type">
+                <% for(var i=0; i<typelist.length;i++){%>
+                <%if(data[0].type==typelist[i].typeid){%>
+                <option value=<%=typelist[i].typeid%> selected="selected"><%=typelist[i].label%></option>
+                <%}%>
+                <%if(data[0].type!=typelist[i].typeid){%>
+                <option value=<%=typelist[i].typeid%>><%=typelist[i].label%></option>
+                <%}%>
+                <%}%>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>楼层</label>
+            <input class="form-control"  name="floor" value=<%=data[0].floor%>>
+        </div>
+        <div class="form-group">
+            <label>面积</label>
+            <input class="form-control"  name="area" value=<%=data[0].area%>>
+        </div>
+        <div class="form-group">
+            <label>建筑年代</label>
+            <input class="form-control" name="createyear" value=<%=data[0].createyear%>>
+        </div>
+        <div class="form-group">
+            <label>区域</label>
+            <input class="form-control" name="region" value=<%=data[0].region%>>
+        </div>
+        <div class="form-group">
+            <label>地址</label>
+            <input class="form-control"  name="address" value=<%=data[0].address%>>
+        </div>
+        <div class="form-group">
+            <label>经理人</label>
+            <select class="form-control" name="agentid" id="agentid">
+                <% for(var i=0; i< agents.length;i++){%>
+                <%if(data[0].fk_agentid==agents[i].guid){%>
+                <option value=<%=agents[i].guid%> selected="selected"><%=agents[i].name%></option>
+                <%}%>
+                <%if(data[0].fk_agentid!=agents[i].guid){%>
+                <option value=<%=agents[i].guid%>><%=agents[i].name%></option>
+                <%}%>
+                <%}%>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>装修情况：</label>
+            <label class="radio-inline">
+                <input type="radio" name="fitment" id="fitment1" value="0" <%if(data[0].fitment=='0'){%>checked<%}%> >毛坯
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="fitment" id="fitment2" value="1" <%if(data[0].fitment=='1'){%>checked<%}%> >简装
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="fitment" id="fitment3" value="2" <%if(data[0].fitment=='2'){%>checked<%}%> >精装
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="fitment" id="fitment4" value="3" <%if(data[0].fitment=='3'){%>checked<%}%> >豪华装修
+            </label>
+        </div>
+        <div class="form-group">
+            <label>房源朝向：</label>
+            <label class="radio-inline">
+                <input type="radio" name="forward" id="forward1" value="0" <%if(data[0].forward=='0'){%>checked<%}%> >南北朝向
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="forward" id="forward2" value="1" <%if(data[0].forward=='1'){%>checked<%}%> >东西朝向
+            </label>
+        </div>
+        <div class="form-group">
+            <label>有无车库：</label>
+            <label class="radio-inline">
+                <input type="radio" name="carport" id="carport1" value="1" <%if(data[0].hascarport=='1'){%>checked<%}%>>有
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="carport" id="carport2" value="0" <%if(data[0].hascarport=='0'){%>checked<%}%>>无
+            </label>
+        </div>
+        <div class="form-group">
+            <label>描述</label>
+            <textarea class="form-control" rows="6" name="desc"><%=data[0].desc%></textarea>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" onclick="formSubmit('<%=data[0].guid%>')">保存</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        </div>
+    </div>
 </form>

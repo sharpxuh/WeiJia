@@ -35,16 +35,16 @@
                 </div>
         </form>
     </div>
-
+    <script type="text/javascript">
+        function sellFormSubmit(){
+            var value= "/mobile/upload?isrent=1&isin=1&name="+$("#username").val()+"&tel="+$("#tel").val()+"&desc="+$("#desc").val();
+            $("#sellForm").attr("action",value);
+            $("#sellForm").submit();
+        }
+    </script>
 </div>
 
-<script type="text/javascript">
-    function sellFormSubmit(){
-        var value= "/mobile/upload?isrent=1&isin=1&name="+$("#username").val()+"&tel="+$("#tel").val()+"&desc="+$("#desc").val();
-        $("#sellForm").attr("action",value);
-        $("#sellForm").submit();
-    }
-</script>
+
 </body>
 
 

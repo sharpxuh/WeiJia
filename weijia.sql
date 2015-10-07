@@ -10,16 +10,16 @@ Target Server Type    : MYSQL
 Target Server Version : 50537
 File Encoding         : 65001
 
-Date: 2015-10-07 20:27:59
+Date: 2015-10-08 01:06:03
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for agent
+-- Table structure for agents
 -- ----------------------------
-DROP TABLE IF EXISTS `agent`;
-CREATE TABLE `agent` (
+DROP TABLE IF EXISTS `agents`;
+CREATE TABLE `agents` (
   `guid` varchar(50) NOT NULL,
   `name` varchar(50) DEFAULT NULL,
   `sex` varchar(2) DEFAULT NULL,
@@ -31,10 +31,10 @@ CREATE TABLE `agent` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of agent
+-- Records of agents
 -- ----------------------------
-INSERT INTO `agent` VALUES ('24b984d1-9763-4d37-9f31-988925e8035a', 'xue ', '0', '1', 'this is desc', '187263347', '85637182');
-INSERT INTO `agent` VALUES ('33b1795c-98d5-49d8-8d7f-d11012ff9a92', 'hanxue', '1', '1', 'this is desc!!!', '158605567', '66056888');
+INSERT INTO `agents` VALUES ('24b984d1-9763-4d37-9f31-988925e8035a', 'xue', '1', '1', 'this is desc', '187263347', '85637182');
+INSERT INTO `agents` VALUES ('33b1795c-98d5-49d8-8d7f-d11012ff9a92', 'hanxue', '1', '1', 'this is desc!!!', '158605567', '66056888');
 
 -- ----------------------------
 -- Table structure for house
@@ -67,8 +67,8 @@ CREATE TABLE `house` (
 -- ----------------------------
 -- Records of house
 -- ----------------------------
-INSERT INTO `house` VALUES ('090d1fd1-0e6d-4df4-98a2-5b3a5c39909d', '1', '1', '1', '2', '3500', '橄榄湾3房', '1', '10', '90', null, '0', '2010', '实惠3房', '橄榄湾', null, '园区', '33b1795c-98d5-49d8-8d7f-d11012ff9a92', '2015-10-07 20:18:54', '1444220333813.jpg;1444220334011.jpg');
-INSERT INTO `house` VALUES ('8578dc63-c361-4212-b70c-fa407578daf9', '1', '1', '1', '2', '3500', '测试', '2', '11', '90', null, '0', '2009', '么么么么', '橄榄湾', null, '相城', '33b1795c-98d5-49d8-8d7f-d11012ff9a92', '2015-10-07 20:18:43', '1444220323033.jpg;1444220323347.jpg');
+INSERT INTO `house` VALUES ('090d1fd1-0e6d-4df4-98a2-5b3a5c39909', '1', '1', '1', '2', '3500', '橄榄湾3房', '1', '10', '90', null, '0', '2010', '实惠3房', '橄榄湾', null, '园区', '33b1795c-98d5-49d8-8d7f-d11012ff9a92', '2015-10-07 23:39:36', '1444229748859.jpg');
+INSERT INTO `house` VALUES ('8578dc63-c361-4212-b70c-fa407578daf9', '1', '1', '1', '2', '3500', '测试', '2', '11', '90', null, '0', '2009', '么么么么', '橄榄湾', null, '相城', '33b1795c-98d5-49d8-8d7f-d11012ff9a92', '2015-10-07 22:55:01', '1444229701168.jpg');
 
 -- ----------------------------
 -- Table structure for order
@@ -86,17 +86,42 @@ CREATE TABLE `order` (
   `area` varchar(10) DEFAULT NULL,
   `photourl` varchar(400) DEFAULT NULL,
   `desc` varchar(200) DEFAULT NULL,
+  `status` varchar(1) DEFAULT NULL,
+  `createtime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`guid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of order
 -- ----------------------------
-INSERT INTO `order` VALUES ('09e7bb17-fbf7-49fc-8668-366799b0c95b', '0', '0', '', '', '', '0', '', '', '1444219691291.jpg;1444219691475.jpg', '');
-INSERT INTO `order` VALUES ('124b1c8b-5178-498d-9213-8264c16aab4a', '1', '1', 'rr', 'rr', null, null, null, null, '', 'rrr');
-INSERT INTO `order` VALUES ('36ea582d-c3eb-49c4-99e7-1d493f5eaaf5', '0', '0', '', '', '', '0', '', '', '', '');
-INSERT INTO `order` VALUES ('8134f89f-1e68-479c-acb1-312787f4559c', '1', '0', '', '', '', '0', '', '', '', '');
-INSERT INTO `order` VALUES ('eb822fd0-a06f-4ced-ba12-079a0273de8f', '0', '1', 'tom', '11111', null, null, null, null, '', '11111');
+INSERT INTO `order` VALUES ('09e7bb17-fbf7-49fc-8668-366799b0c95b', '0', '0', '4', '4444', '4444', '0', '44', '44', '1444219691291.jpg;1444219691475.jpg', '444', '1', '2015-10-07 22:22:25');
+INSERT INTO `order` VALUES ('124b1c8b-5178-498d-9213-8264c16aab4a', '1', '1', 'rr', 'rr', '444', '1', '3', '45', '5555555', 'rrr', '1', '2015-10-07 22:22:34');
+INSERT INTO `order` VALUES ('36ea582d-c3eb-49c4-99e7-1d493f5eaaf5', '0', '0', 'dr', '3333', 'sdd', '0', '', '', '', '', '1', '2015-10-07 22:22:41');
+INSERT INTO `order` VALUES ('4334a722-5027-4b8e-8b3d-e45ef0690358', '1', '0', '', '', '', '0', '', '', '1444237269277.jpg', '', '1', '2015-10-08 01:01:09');
+INSERT INTO `order` VALUES ('6e22fc6e-a678-4f33-82ef-215160a0e1f2', '0', '1', 'to', '11', null, '1', null, null, '', '12', '1', '2015-10-07 22:29:06');
+INSERT INTO `order` VALUES ('7d75b486-ae95-4c0d-a486-1b6bb3cdde15', '0', '1', '', '', null, null, null, null, '', '', '0', '2015-10-08 01:04:53');
+INSERT INTO `order` VALUES ('8134f89f-1e68-479c-acb1-312787f4559c', '1', '0', '', '', '', '0', '', '', '1444222980664.jpg;1444222980441.jpg', '', '1', '2015-10-07 22:45:03');
+INSERT INTO `order` VALUES ('a78b91c0-e96f-453d-9845-c619393017bf', '1', '0', null, null, null, null, null, null, null, null, '0', '2015-10-08 01:04:40');
+INSERT INTO `order` VALUES ('ae0b2a39-fd11-4060-9cb7-c06ee1febe51', '1', '1', '1111', '11', null, null, null, null, '', '11', '1', '2015-10-08 01:00:48');
+INSERT INTO `order` VALUES ('dff66d0e-eccc-47c8-8e58-4c5c5771be44', null, null, null, null, null, null, null, null, null, null, '1', '2015-10-08 00:38:32');
+INSERT INTO `order` VALUES ('eb822fd0-a06f-4ced-ba12-079a0273de8f', '0', '1', 'tom', '11111', null, '1', null, null, '', '11111', '1', '2015-10-07 22:29:08');
+
+-- ----------------------------
+-- Table structure for recruit
+-- ----------------------------
+DROP TABLE IF EXISTS `recruit`;
+CREATE TABLE `recruit` (
+  `guid` char(36) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
+  `duty` varchar(400) DEFAULT NULL,
+  `require` varchar(400) DEFAULT NULL,
+  `number` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`guid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of recruit
+-- ----------------------------
+INSERT INTO `recruit` VALUES ('8578dc63-c361-4212-b70c-fa407578dafa', '1111111111111111112', '1111111111133', '12');
 
 -- ----------------------------
 -- Table structure for typelist

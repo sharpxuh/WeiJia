@@ -10,7 +10,7 @@
     <meta name="author" content="">
 
     <title>唯佳房产</title>
-
+    <link href="/stylesheets/swipebox.min.css" rel="stylesheet"  />
     <!-- Bootstrap Core CSS -->
     <link href="/startbootstrap-sb-admin-2-1.0.5/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -144,20 +144,20 @@
         </div>
         <!-- /.navbar-static-side -->
     </nav>
-    <div id="page-wrapper" >
+    <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">用户管理</h1>
+                <h1 class="page-header">预约信息</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
         <!-- /.row -->
-        <button type="button" class="btn btn-primary" onclick="show('new')">新增用户</button>
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <b>系统用户</b>
+                        <% if(rent==true) {%> <b>租出预约</b><%}%>
+                        <% if(rent==false) {%> <b>卖房预约</b><%}%>
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -166,25 +166,34 @@
                                 <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>账号</th>
-                                    <th>密码</th>
-                                    <th>用户名</th>
-                                    <th>是否管理员</th>
+                                    <th>姓名</th>
+                                    <th>联系方式</th>
+                                    <th>地址</th>
+                                    <th>类型</th>
+                                    <th>楼层</th>
+                                    <th>面积</th>
                                     <th>描述</th>
+                                    <th>照片</th>
                                     <th style="text-align: center">操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <% for(var i=0; i<data.length; i++){%>
-                                <tr <% if(i%2==0){%> class="odd gradeA"<%}%> <%if(i%2==1){%>class="even gradeA"<%}%>>
-                                <td><%=i+1%></td>
-                                <td><%= data[i].username %></td>
-                                <td><%= data[i].password %></td>
-                                <td><%= data[i].name %></td>
-                                <td><% if(data[i].role=="1"){%> 是 <%}%> <%if(data[i].role=="0"){%>否<%}%></td>
-                                <td><%= data[i].desc %></td>
-                                <td style="text-align: center"><button type="button" class="btn btn-danger" onClick="deleteUser('<%=data[i].guid%>')">删除</button>
-                                    <button type="button"  class="btn btn-success" onclick="show('<%=data[i].guid%>')">修改</button></td>
+                                <% for(var i=0; i< data.length;i++){%>
+                                <tr>
+                                    <td><%=i+1%></td>
+                                    <td><%= data[i].name %></td>
+                                    <td><%= data[i].tel %></td>
+                                    <td><%= data[i].address %></td>
+                                    <td><%if(data[i].typelist!=null){%><%= data[i].typelist.label %><%}%></td>
+                                    <td><%= data[i].floor %></td>
+                                    <td><%= data[i].area %></td>
+                                    <td><%= data[i].desc %></td>
+                                    <td><%if(data[i].photourl!=null){%>
+                                    <img src="/upload/<%=(data[i].photourl).split(';')[0]%>" style="width:50px;height:50px" alt="image" id="gallery" onerror="this.src='/images/b.jpg'" onclick="showPic('<%=(data[i].photourl)%>')">
+                                     <%}%>
+                                    </td>
+                                    <td style="text-align: center"><button type="button" class="btn btn-danger" onClick="deleteOrder('<%=data[i].guid%>')">删除</button>
+                                    </td>
                                 </tr>
                                 <%}%>
                                 </tbody>
@@ -199,86 +208,79 @@
             <!-- /.col-lg-12 -->
         </div>
         <!-- /.row -->
-
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-             aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal -->
-        </div>
-
-        <!-- /#page-wrapper -->
-
     </div>
-    <!-- /#wrapper -->
+    <!-- /#page-wrapper -->
 </div>
-    <!-- jQuery -->
-    <script src="/startbootstrap-sb-admin-2-1.0.5/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- /#wrapper -->
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/startbootstrap-sb-admin-2-1.0.5/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- jQuery -->
+<script src="/startbootstrap-sb-admin-2-1.0.5/bower_components/jquery/dist/jquery.min.js"></script>
 
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="/startbootstrap-sb-admin-2-1.0.5/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="/startbootstrap-sb-admin-2-1.0.5/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
-    <!-- DataTables JavaScript -->
-    <script src="/startbootstrap-sb-admin-2-1.0.5/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
-    <script src="/startbootstrap-sb-admin-2-1.0.5/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+<!-- Metis Menu Plugin JavaScript -->
+<script src="/startbootstrap-sb-admin-2-1.0.5/bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
-    <!-- Custom Theme JavaScript -->
-    <script src="/startbootstrap-sb-admin-2-1.0.5/dist/js/sb-admin-2.js"></script>
+<!-- DataTables JavaScript -->
+<script src="/startbootstrap-sb-admin-2-1.0.5/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+<script src="/startbootstrap-sb-admin-2-1.0.5/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
 
-    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
-    <script>
-        $(document).ready(function() {
-            $('#dataTables-example').DataTable({
-                responsive: true,
-                bStateSave: true
-            });
+<!-- Custom Theme JavaScript -->
+<script src="/startbootstrap-sb-admin-2-1.0.5/dist/js/sb-admin-2.js"></script>
+
+<!-- fnReloadAjax -->
+<!-- <script src="http://cdn.datatables.net/plug-ins/1.10.9/api/fnReloadAjax.js"></script>-->
+<script src="/javascripts/jquery.swipebox.min.js"></script>
+
+<script src="/javascripts/jquery-form.js"></script>
+
+<!-- Page-Level Demo Scripts - Tables - Use for reference -->
+<script>
+    $(document).ready(function() {
+        $('#dataTables-example').DataTable({
+            responsive: true,
+            bStateSave: true
         });
+    });
 
-        function deleteUser(guid){
-            $.ajax({
-                type: "get",
-                url: "/user/deleteUser/"+guid,
-                dataType: "json",
-                success: function(data){
-                    if(data.success == true){
-                        window.location.reload();
-                    }else{
-                        alert("删除失败！");
-                    }
+
+    function deleteOrder(guid){
+        $.ajax({
+            type: "get",
+            url: "/order/deleteOrder/"+guid,
+            dataType: "json",
+            success: function(data){
+                if(data.success == true){
+                    window.location.reload();
+                }else{
+                    alert("删除失败！");
                 }
-            });
-        }
+            }
+        });
+    }
 
-        function show(guid){
-            $('#myModal').modal({remote:'/user/detailUser/'+guid,backdrop:false}).on("hidden.bs.modal", function () {
-                $(this).removeData("bs.modal");
-            });
-        }
 
-        function formSubmit(guid){
-            var formData=$("#userForm").serialize();
-            $.ajax({
-                type: "POST",
-                url: "/user/updateUser/"+guid,
-                processData:true,
-                data:formData,
-                success: function(data){
-                    if(data.success==true){
-                        alert("操作成功！");
-                        $('#myModal').modal('hide');
-                        window.location.reload();
-                    }else{
-                        alert("操作失败！");
-                    }
-                }
-            });
-        };
-    </script>
+    function showPic(photourl) {
+        var photourl =photourl.split(";");
+        var msg = [];
+        $.each(photourl,function(){
+            if(this!=""){
+                msg.push({ href:'/upload/'+this,title:'' })
+            }else{
+                msg.push({ href:'/images/b.jpg',title:'暂时无照片' });
+            }
+        })
+        $.swipebox(msg);
+    };
+    jQuery(function($) {
+        $(".swipebox").swipebox({
+            useCSS : true,
+            hideCloseButtonOnMobile : false
+        });
+    });
+
+</script>
 </body>
 
 </html>

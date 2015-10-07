@@ -2,6 +2,7 @@
  * Created by Tom on 2015/9/9.
  */
 var user = require('../models/user');
+var recruit = require('../models/recruit');
 
 exports.findByUsernameAndPassword = function (username,password,callback){
     user.findAll({where:{username:username,password:password}}).then(function(data){
@@ -68,4 +69,28 @@ exports.insertUser = function(username,password,name,admin,desc,callback){
     }).catch(function(error){
         console.log(error);
     })
-}
+};
+
+exports.findRecruit = function (callback){
+    recruit.findAll({ }).then(function(data){
+        if(callback){
+            callback(data);
+        }
+    })
+};
+
+exports.updateRecruitByGuid = function(guid,duty,require,number,callback){
+    recruit.update({
+        duty: duty,
+        require:require,
+        number: number
+    }, {
+        where: {
+            guid: guid
+        }
+    }).then(function(data){
+        callback(data);
+    }).catch(function(error){
+        console.log(error);
+    })
+};

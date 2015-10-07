@@ -136,7 +136,7 @@
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="/user/recruit"><i class="fa fa-graduation-cap fa-fw"></i> 招聘信息</a>
+                        <a href="index.html"><i class="fa fa-graduation-cap fa-fw"></i> 招聘信息</a>
                     </li>
                 </ul>
             </div>
@@ -147,73 +147,36 @@
     <div id="page-wrapper" >
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">用户管理</h1>
+                <h1 class="page-header">招聘信息</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
-        <!-- /.row -->
-        <button type="button" class="btn btn-primary" onclick="show('new')">新增用户</button>
         <div class="row">
-            <div class="col-lg-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <b>系统用户</b>
+            <div class="col-lg-6">
+                <form role="form"  method="post" id="recruitForm">
+                        <label>责任描述:</label>
+                        <textarea class="form-control" rows="5" id="duty"><%=data[0].duty%></textarea>
+                    <div class="form-group">
+                        <label>招聘要求:</label>
+                        <textarea class="form-control" rows="5" id="require"><%=data[0].require%></textarea>
                     </div>
-                    <!-- /.panel-heading -->
-                    <div class="panel-body">
-                        <div class="dataTable_wrapper">
-                            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                                <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>账号</th>
-                                    <th>密码</th>
-                                    <th>用户名</th>
-                                    <th>是否管理员</th>
-                                    <th>描述</th>
-                                    <th style="text-align: center">操作</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <% for(var i=0; i<data.length; i++){%>
-                                <tr <% if(i%2==0){%> class="odd gradeA"<%}%> <%if(i%2==1){%>class="even gradeA"<%}%>>
-                                <td><%=i+1%></td>
-                                <td><%= data[i].username %></td>
-                                <td><%= data[i].password %></td>
-                                <td><%= data[i].name %></td>
-                                <td><% if(data[i].role=="1"){%> 是 <%}%> <%if(data[i].role=="0"){%>否<%}%></td>
-                                <td><%= data[i].desc %></td>
-                                <td style="text-align: center"><button type="button" class="btn btn-danger" onClick="deleteUser('<%=data[i].guid%>')">删除</button>
-                                    <button type="button"  class="btn btn-success" onclick="show('<%=data[i].guid%>')">修改</button></td>
-                                </tr>
-                                <%}%>
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- /.table-responsive -->
+                    <div class="form-group">
+                        <label>招聘人数:</label>
+                        <input class="form-control" value='<%=data[0].number%>' id="number">
                     </div>
-                    <!-- /.panel-body -->
-                </div>
-                <!-- /.panel -->
+                    <br/>
+                    <button type="button" class="btn btn-success" onclick="recruitSubmit('<%=data[0].guid%>')">确定</button>&nbsp;&nbsp;&nbsp;
+                    <button type="reset" class="btn btn-danger">重置</button>
+                </form>
             </div>
-            <!-- /.col-lg-12 -->
-        </div>
-        <!-- /.row -->
-
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-             aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal -->
         </div>
 
         <!-- /#page-wrapper -->
 
     </div>
+    </div>
     <!-- /#wrapper -->
-</div>
+
     <!-- jQuery -->
     <script src="/startbootstrap-sb-admin-2-1.0.5/bower_components/jquery/dist/jquery.min.js"></script>
 
@@ -232,45 +195,13 @@
 
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
-        $(document).ready(function() {
-            $('#dataTables-example').DataTable({
-                responsive: true,
-                bStateSave: true
-            });
-        });
-
-        function deleteUser(guid){
-            $.ajax({
-                type: "get",
-                url: "/user/deleteUser/"+guid,
-                dataType: "json",
-                success: function(data){
-                    if(data.success == true){
-                        window.location.reload();
-                    }else{
-                        alert("删除失败！");
-                    }
-                }
-            });
-        }
-
-        function show(guid){
-            $('#myModal').modal({remote:'/user/detailUser/'+guid,backdrop:false}).on("hidden.bs.modal", function () {
-                $(this).removeData("bs.modal");
-            });
-        }
-
-        function formSubmit(guid){
-            var formData=$("#userForm").serialize();
+        function recruitSubmit(guid){
             $.ajax({
                 type: "POST",
-                url: "/user/updateUser/"+guid,
-                processData:true,
-                data:formData,
+                url: "/user/updateRecruit/"+guid+"?duty="+$("#duty").val()+"&require="+$("#require").val()+"&number="+$("#number").val(),
                 success: function(data){
                     if(data.success==true){
                         alert("操作成功！");
-                        $('#myModal').modal('hide');
                         window.location.reload();
                     }else{
                         alert("操作失败！");
@@ -278,6 +209,7 @@
                 }
             });
         };
+
     </script>
 </body>
 

@@ -39,14 +39,19 @@ background-color:#D00000;
        </header>
        <div data-role="content" >
          <div  style="text-align :center" >
-            <img src="/upload/<%=(data[0].photourl).split(";")[0]%>" alt="image" id="gallery" onerror="this.src='/images/b.jpg'">
+            <img src="/upload/<%=(data[0].photourl).split(";")[0]%>" alt="image" style="max-width:100%;overflow:hidden;"  id="gallery" onerror="this.src='/images/b.jpg'">
          </div>
          <p></p>
          <div class="ui-grid-b">
                       <div class="ui-block-a">标题:<%=data[0].title%></div>
                       <div class="ui-block-b"></div>
                       <div class="ui-block-c" style="width:30%">
-                            <a href="#" data-role="button">预约</a>
+                            <% if(data[0].isRent==0){%>
+                            <a href="/mobile/sellIn" data-role="button">预约</a>
+                            <%}%>
+                            <% if(data[0].isRent==1){%>
+                             <a href="/mobile/rentIn" data-role="button">预约</a>
+                            <%}%>
                       </div>
          </div>
          <p></p>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
@@ -12,12 +13,12 @@
 </style>
 <head>
     <meta charset="UTF-8">
-    <title>我要买房</title>
+    <title>我要租房</title>
 </head>
 <body>
 <div data-role="page" id="photos">
     <header data-role="header" data-theme="f">
-        <h1>我要买房</h1>
+        <h1>我要租房</h1>
     </header>
     <div data-role="content">
         <form  method="post"  enctype="multipart/form-data" data-ajax="false" id="sellForm">
@@ -39,7 +40,7 @@
 
 <script type="text/javascript">
     function sellFormSubmit(){
-        var value= "/mobile/upload?isrent=0&isin=1&name="+$("#username").val()+"&tel="+$("#tel").val()+"&desc="+$("#desc").val();
+        var value= "/mobile/upload?isrent=1&isin=1&name="+$("#username").val()+"&tel="+$("#tel").val()+"&desc="+$("#desc").val();
         $("#sellForm").attr("action",value);
         $("#sellForm").submit();
     }
