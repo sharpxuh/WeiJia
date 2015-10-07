@@ -20,7 +20,3 @@ var user = sequelize.define("user",{
 //user.create({username:'tom',password:'123456'}).then(function(){});
 
 module.exports = user;
-
-
-
-//console.log(([]+{}).length);

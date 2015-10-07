@@ -12,10 +12,19 @@
         										<label>价格</label>
         										<input class="form-control"  name="price" value=<%=data[0].price%>>
         									</div>
- 											<div class="form-group">
-         										<label>户型</label>
-         										<input class="form-control"  name="type" value=<%=data[0].type%>>
-         									</div>
+											<div class="form-group">
+        										<label>户型</label>
+        										<select class="form-control" name="type" id="type">
+        											<% for(var i=0; i<typelist.length;i++){%>
+        											<%if(data[0].type==typelist[i].typeid){%>
+        											<option value=<%=typelist[i].typeid%> selected="selected"><%=typelist[i].label%></option>
+        											<%}%>
+													<%if(data[0].type!=typelist[i].typeid){%>
+        											<option value=<%=typelist[i].typeid%>><%=typelist[i].label%></option>
+        											<%}%>
+        											<%}%>
+        										</select>
+        									</div>
  											<div class="form-group">
           										<label>楼层</label>
           										<input class="form-control"  name="floor" value=<%=data[0].floor%>>

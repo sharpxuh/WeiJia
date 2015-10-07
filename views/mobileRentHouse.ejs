@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<style>
+.ui-bar-f
+{
+color:white;
+background-color:#D00000;
+}
+</style>
+<head>
+    <meta charset="UTF-8">
+    <title>我要出租</title>
+</head>
+<body>
+<div data-role="page" id="sell">
+    <header data-role="header" data-theme="f">
+        <h1>我要出租</h1>
+    </header>
+    <div data-role="content">
+            <form role="form"  method="post"  enctype="multipart/form-data" data-ajax="false" id="sellForm">
+           <div data-role="fieldcontain">
+                  <label for="lname">姓名：</label>
+                  <input type="text" name="username" id="username">
+                  <label for="fname">联系方式：</label>
+                  <input type="text" name="tel" id="tel">
+                  <label for="fname">价格：</label>
+                  <input type="text" name="price" id="price" placeholder="元">
+                  <label for="fname">房产地址：</label>
+                  <input type="text" name="address" id="address">
+                  <label for="day">户型</label>
+                      <select name="type" id="type">
+                            <% for(var i=0; i<data.length;i++){%>
+        						<option value=<%=data[i].typeid%>><%=data[i].label%></option>
+        					<%}%>
+                      </select>
+                  <label for="fname">楼层：</label>
+                  <input type="text" name="floor" id="floor" placeholder="层">
+                  <label for="fname">面积：</label>
+                  <input type="text" name="area" id="area" placeholder="平米">
+           </div>
+           <div> <label for="fname">上传照片：</label></div>
+           <div><input type="file" name="upload" id="fileToUpload" multiple="multiple"></div>
+           <div> <label for="fname">备注：</label></div>
+           <div> <textarea name="desc" id="desc"></textarea></div>
+           <div style="position: absolute;left: 40%">
+                <input  type="button" data-inline="true" value="发布信息" onclick="sellFormSubmit()">
+           </div>
+        </form>
+    </div>
+ </div>
+
+    <script type="text/javascript">
+        function sellFormSubmit(){
+            var value= "/mobile/upload?isrent=1&isin=0&name="+$("#username").val()+"&tel="+$("#tel").val()+"&price="+$("#price").val()+"&address="+$("#address").val()+"&type="+$("#type").val()+"&floor="+$("#floor").val()+"&area="+$("#area").val()+"&desc="+$("#desc").val();
+            $("#sellForm").attr("action",value);
+            $("#sellForm").submit();
+        }
+    </script>
+</body>
+
+
+</html>

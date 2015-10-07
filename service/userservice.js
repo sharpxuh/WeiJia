@@ -23,7 +23,8 @@ exports.findAllUsers = function (callback){
     user.findAll({
         where:{
             status:'1'
-        },
+        }
+
     }).then(function(data){
         if(callback){
             callback(data);

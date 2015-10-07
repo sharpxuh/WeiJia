@@ -4,6 +4,7 @@
 
 var house = require('../models/house');
 var agent = require('../models/agent');
+var typelist = require("../models/typelist");
 var Sequelize = require('sequelize');
 
 exports.findByIsRent = function(isRent,callback){
@@ -12,9 +13,9 @@ exports.findByIsRent = function(isRent,callback){
             isRent:isRent,
             status:'1'
         },
-        include: [{
-            model: agent
-        }
+        include: [
+            agent,
+            typelist
     ],
         order:[['createtime', 'DESC']]
     }).then(function(data){
@@ -37,6 +38,18 @@ exports.findByIsRent = function(isRent,callback){
 exports.deleteByGuid = function(guid,callback){
     house.update({
        status:"0"
+    },{
+        where: {
+            guid: guid
+        }
+    }).then(function(data){
+        callback(data);
+    });
+};
+
+exports.updatePhotourl = function(guid,photourl,callback){
+    house.update({
+        photourl:photourl
     },{
         where: {
             guid: guid

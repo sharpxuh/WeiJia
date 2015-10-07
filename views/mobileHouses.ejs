@@ -1,19 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-<link href="/stylesheets/datouwang.css" rel="stylesheet"  />
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-<script src="/javascripts/koala.min.1.5.js"></script>
-
 <style>
 .ui-bar-f
 {
 color:white;
 background-color:#D00000;
 }
-
-.focus img {     display: block;     height: auto;     width: 100%; }
 </style>
 <head>
     <meta charset="UTF-8">
@@ -22,10 +18,10 @@ background-color:#D00000;
 <body>
 <div data-role="page" id="photos">
     <header data-role="header" data-theme="f">
-        <h1>My Photos</h1>
+        <h1>房源信息-<%if(rent==true){%>租房<%}%><%if(rent==false){%>二手房<%}%></h1>
     </header>
     <article data-role="content">
-    <div class="ui-grid-c">
+    <div class="ui-grid-b">
                   <div class="ui-block-a">
                     <select name="price" id="price">
                         <option value="">价格</option>
@@ -35,40 +31,36 @@ background-color:#D00000;
                   </div>
                   <div class="ui-block-b">
                     <select name="area" id="area">
-                        <option value="">面积</option>
+                        <option value="">户型</option>
                         <option value="0">75以下</option>
                         <option value="1">75~100平</option>
                         <option value="2">100平以上</option>
                     </select>
-                  </span></div>
+                  </div>
                   <div class="ui-block-c">
-                    <select name="fitment" id="fitment">
-                        <option value="">装修</option>
-                        <option value="0">毛坯</option>
-                        <option value="1">简装</option>
-                        <option value="2">精装</option>
-                        <option value="3">豪华装</option>
-                    </select>
-                  </span></div>
-                  <div class="ui-block-d">
                     <select name="region" id="region">
                         <option value="">区域</option>
                         <option value="0">工业园区</option>
                         <option value="1">相城区</option>
                         <option value="2">姑苏区</option>
                     </select>
-                  </span></div>
+                  </div>
                 </div>
         <ul data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="楼盘/区域">
 
             <li data-role="list-divider" data-theme="f">精选房源</li>
              <% for(var i=0; i<data.length;i++){%>
-            <li>
-                <a href="#detailHouse">
-                    <img src="/images/a.jpg" alt="Min Pin" />
-                    <div style="float:right;color:#D00000;padding:20px 40px"><%=data[i].price%>/月</div>
-                    <h3><%=data[i].title%></h3>
-                    <p><%=data[i].type%>  <%if(data[i].fitment=="0"){%>毛坯<%}%><%if(data[i].fitment=="1"){%>简装<%}%><%if(data[i].fitment=="2"){%>精装<%}%><%if(data[i].fitment=="3"){%>豪华装修<%}%></p>
+            <li onclick="houseDetail('<%=data[i].guid%>')">
+                <a >
+                    <img src="/upload/<%=(data[i].photourl).split(";")[0]%>" style="padding:12px 0 12px 10px" alt="image" id="gallery" onerror="this.src='/images/b.jpg'">
+                    <div style="float:left">
+                        <h3><%=data[i].title%></h3>
+                        <p><%=data[i].type%>  <%if(data[i].fitment=="0"){%>毛坯<%}%><%if(data[i].fitment=="1"){%>简装<%}%><%if(data[i].fitment=="2"){%>精装<%}%><%if(data[i].fitment=="3"){%>豪华装修<%}%></p>
+                        <p><%=data[i].region%></p>
+                    </div>
+                    <div style="float:right;padding-top: 24px;padding-bottom: 24px;padding-right: 24px;">
+                        <h3><%=data[i].price%></h3>
+                    </div>
                 </a>
             </li>
             <%}%>
@@ -76,65 +68,13 @@ background-color:#D00000;
     </article>
     </div>
 
+    <script type="text/javascript">
 
-
-    <div data-role="page" id="detailHouse">
-       <header data-role="header" data-theme="f">
-       <a href="#" data-role="button" data-rel="back" data-icon="back" data-iconpos="notext">返回</a>
-               <h1>My Photos</h1>
-           </header>
-            <div data-role="content">
-                <div id="fsD1" class="focus" >
-                                          <div id="D1pic1" class="fPic">
-                                              <div class="fcon" style="display: none;">
-                                                  <a  href="http://sc.chinaz.com/"><img src="/images/01.jpg" style="opacity: 1; "></a>
-                                              </div>
-
-                                              <div class="fcon" style="display: none;">
-                                                  <a  href="http://sc.chinaz.com/"><img src="/images/02.jpg" style="opacity: 1; "></a>
-                                              </div>
-
-                                              <div class="fcon" style="display: none;">
-                                                  <a  href="http://sc.chinaz.com/"><img src="/images/03.jpg" style="opacity: 1; "></a>
-                                              </div>
-
-                                              <div class="fcon" style="display: none;">
-                                                  <a  href="http://sc.chinaz.com/"><img src="/images/04.jpg" style="opacity: 1; "></a>
-                                                  <span class="shadow"><a  href="#">金喜善出道21年 皮肤白皙越长越“嫩”！</a></span>
-                                              </div>
-                                          </div>
-                                          <div class="fbg">
-                                          <div class="D1fBt" id="D1fBt">
-                                              <a href="javascript:void(0)" hidefocus="true" target="_self" class=""><i>1</i></a>
-                                              <a href="javascript:void(0)" hidefocus="true" target="_self" class=""><i>2</i></a>
-                                              <a href="javascript:void(0)" hidefocus="true" target="_self" class="current"><i>3</i></a>
-                                              <a href="javascript:void(0)" hidefocus="true" target="_self" class=""><i>4</i></a>
-                                          </div>
-                                          </div>
-                                          <span class="prev"></span>
-                                          <span class="next"></span>
-                                      </div>
-             </div>
-        </div>
-
-</body>
-<script type="text/javascript">
-    	Qfast.add('widgets', { path: "/javascripts/terminator2.2.min.js", type: "js", requires: ['fx'] });
-    	Qfast(false, 'widgets', function () {
-    		K.tabs({
-    			id: 'fsD1',   //焦点图包裹id
-    			conId: "D1pic1",  //** 大图域包裹id
-    			tabId:"D1fBt",
-    			tabTn:"a",
-    			conCn: '.fcon', //** 大图域配置class
-    			auto: 1,   //自动播放 1或0
-    			effect: 'fade',   //效果配置
-    			eType: 'click', //** 鼠标事件
-    			pageBt:true,//是否有按钮切换页码
-    			bns: ['.prev', '.next'],//** 前后按钮配置class
-    			interval: 3000  //** 停顿时间
-    		})
-    	})
+        function houseDetail(guid){
+            window.location = "/mobile/detailHouse/"+guid;
+        }
     </script>
+</body>
+
 
 </html>

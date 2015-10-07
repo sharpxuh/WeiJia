@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>唯佳房产</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/startbootstrap-sb-admin-2-1.0.5/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -45,106 +45,105 @@
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">SB Admin v2.0</a>
+                       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                           <span class="sr-only">Toggle navigation</span>
+                           <span class="icon-bar"></span>
+                           <span class="icon-bar"></span>
+                           <span class="icon-bar"></span>
+                       </button>
+                       <a class="navbar-brand" href="#">唯佳房产管理平台</a>
 
-        </div>
-        <!-- /.navbar-header -->
+                   </div>
+                   <!-- /.navbar-header -->
 
-        <ul class="nav navbar-top-links navbar-right">
-            <!-- /.dropdown -->
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-user">
+                   <ul class="nav navbar-top-links navbar-right">
+                       <!-- /.dropdown -->
+                       <li class="dropdown">
+                           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                               <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                           </a>
+                           <ul class="dropdown-menu dropdown-user">
 
-                    <li><a href="/user/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                    </li>
-                </ul>
-                <!-- /.dropdown-user -->
-            </li>
-            <!-- /.dropdown -->
-        </ul>
-        <!-- /.navbar-top-links -->
-        <div style="float:right;padding:15px">欢迎回来：<%=user[0].name%></div>
-        <div class="navbar-default sidebar" role="navigation">
-            <div class="sidebar-nav navbar-collapse">
-                <ul class="nav" id="side-menu">
-                    <li>
-                        <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                    </li>
-                    <%if(user[0].role == '1'){%>
-                    <li>
-                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> 用户管理<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="/user/sysUser"> 系统用户</a>
-                            </li>
-                            <li>
-                                <a href="/user/agent"> 经纪人</a>
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
-                    <%}%>
-                    <li>
-                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> 房源信息<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="/house/rentHouse"> 租赁房源</a>
-                            </li>
-                            <li>
-                                <a href="/house/secondHouse"> 二手房源</a>
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-edit fa-fw"></i> 预约信息<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">租赁房预约<span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li>
-                                        <a href="#">租入</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">租出</a>
-                                    </li>
-                                </ul>
-                                <!-- /.nav-third-level -->
-                            </li>
-                            <li>
-                                <a href="#">二手房房预约<span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li>
-                                        <a href="#">买入</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">卖出</a>
-                                    </li>
-                                </ul>
-                                <!-- /.nav-third-level -->
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
-                    <li>
-                        <a href="index.html"><i class="fa fa-graduation-cap fa-fw"></i> 招聘信息</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.sidebar-collapse -->
-        </div>
-        <!-- /.navbar-static-side -->
-    </nav>
-
+                               <li><a href="/user/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                               </li>
+                           </ul>
+                           <!-- /.dropdown-user -->
+                       </li>
+                       <!-- /.dropdown -->
+                   </ul>
+                   <!-- /.navbar-top-links -->
+                   <div style="float:right;padding:15px">欢迎光临：<%=user[0].name%></div>
+                   <div class="navbar-default sidebar" role="navigation">
+                       <div class="sidebar-nav navbar-collapse">
+                           <ul class="nav" id="side-menu">
+                               <li>
+                                   <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                               </li>
+                               <%if(user[0].role == '1'){%>
+                               <li>
+                                   <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> 用户管理<span class="fa arrow"></span></a>
+                                   <ul class="nav nav-second-level">
+                                       <li>
+                                           <a href="/user/sysUser"> 系统用户</a>
+                                       </li>
+                                       <li>
+                                           <a href="/user/agent"> 经纪人</a>
+                                       </li>
+                                   </ul>
+                                   <!-- /.nav-second-level -->
+                               </li>
+                               <%}%>
+                               <li>
+                                   <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> 房源信息<span class="fa arrow"></span></a>
+                                   <ul class="nav nav-second-level">
+                                       <li>
+                                           <a href="/house/rentHouse"> 租赁房源</a>
+                                       </li>
+                                       <li>
+                                           <a href="/house/secondHouse"> 二手房源</a>
+                                       </li>
+                                   </ul>
+                                   <!-- /.nav-second-level -->
+                               </li>
+                               <li>
+                                   <a href="#"><i class="fa fa-edit fa-fw"></i> 预约信息<span class="fa arrow"></span></a>
+                                   <ul class="nav nav-second-level">
+                                       <li>
+                                           <a href="#">租赁房预约<span class="fa arrow"></span></a>
+                                           <ul class="nav nav-third-level">
+                                               <li>
+                                                   <a href="#">租入</a>
+                                               </li>
+                                               <li>
+                                                   <a href="#">租出</a>
+                                               </li>
+                                           </ul>
+                                           <!-- /.nav-third-level -->
+                                       </li>
+                                        <li>
+                                           <a href="#">二手房房预约<span class="fa arrow"></span></a>
+                                           <ul class="nav nav-third-level">
+                                                <li>
+                                                    <a href="#">买入</a>
+                                                </li>
+                                                 <li>
+                                                     <a href="#">卖出</a>
+                                                 </li>
+                                            </ul>
+                                            <!-- /.nav-third-level -->
+                                        </li>
+                                   </ul>
+                                   <!-- /.nav-second-level -->
+                               </li>
+                               <li>
+                                   <a href="index.html"><i class="fa fa-graduation-cap fa-fw"></i> 招聘信息</a>
+                               </li>
+                           </ul>
+                       </div>
+                       <!-- /.sidebar-collapse -->
+                   </div>
+                   <!-- /.navbar-static-side -->
+               </nav>
     <div id="page-wrapper" >
         <div class="row">
                     <div class="col-lg-12">

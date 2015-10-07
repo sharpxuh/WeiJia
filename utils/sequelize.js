@@ -4,7 +4,7 @@
 var Sequelize = require('sequelize');
 
 var sequelize = new Sequelize('weijia','root','123',{
-    host:'localhost',
+    host:'127.0.0.1',
     dialect:'mysql',
 
     pool:{

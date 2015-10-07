@@ -1,0 +1,13 @@
+<form role="form"  method="post" enctype="multipart/form-data" id="uploadForm">
+<div class="modal-header">
+	<h4>照片上传</h4>
+</div>
+<div class="modal-body" >
+        									<div class="form-group">
+        										<input type="file" name="upload" multiple="multiple">
+        									</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" onclick="uploadFiles('<%=data%>')">保存</button>
+    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+</div>
+</form>

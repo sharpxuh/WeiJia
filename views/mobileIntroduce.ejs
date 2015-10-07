@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<style>
+    .ui-bar-f
+    {
+        color:white;
+        background-color:#D00000;
+    }
+</style>
+<head>
+    <meta charset="UTF-8">
+    <title>公司简介</title>
+</head>
+<body>
+<div data-role="page" id="photos">
+    <header data-role="header" data-theme="f">
+        <h1>公司简介</h1>
+    </header>
+    <div data-role="content">
+
+        <p style="text-indent : 20px;letter-spacing:1px;line-height:1.5;">唯佳房产经纪有限公司是经工商注册的合法中介机构，是一家专业的房产服务公司。主要从事房屋买卖，房屋租赁，抵押贷款，代办过户，一手房代理等业务。公司秉承“为您寻找一个温暖的家”的服务宗旨，以专业规范的服务理念，为广大客户提供完善，周到，放心的服务。</p>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    function sellFormSubmit(){
+        var value= "/mobile/upload?isrent=0&isin=1&name="+$("#username").val()+"&tel="+$("#tel").val()+"&desc="+$("#desc").val();
+        $("#sellForm").attr("action",value);
+        $("#sellForm").submit();
+    }
+</script>
+</body>
+
+
+</html>

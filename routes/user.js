@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var userservice = require('../service/userservice');
+var agentservice = require('../service/agentservice');
 var filter = require("../utils/filter");
 
 /* GET users listing. */
@@ -28,9 +29,25 @@ router.get('/sysUser',filter.authorize,function(req,res,next){
     })
 });
 
+router.get('/agent',filter.authorize,function(req,res,next){
+    agentservice.findAll(function(result){
+        res.render('agent',{data:result});
+    })
+});
+
 router.get('/deleteUser/:_id',filter.authorize, function (req, res, next) {
     userservice.deleteByGuid(req.params._id, function (result) {
-        if (result > 0) {
+        if (result) {
+            res.send({'success': true});
+        }else{
+            res.send({'success': false});
+        }
+    })
+});
+
+router.get('/deleteAgent/:_id',filter.authorize, function (req, res, next) {
+    agentservice.deleteByGuid(req.params._id, function (result) {
+        if (result) {
             res.send({'success': true});
         }else{
             res.send({'success': false});
@@ -48,6 +65,16 @@ router.get('/detailUser/:_id',filter.authorize, function (req, res, next) {
     }
 });
 
+router.get('/detailAgent/:_id',filter.authorize, function (req, res, next) {
+    if(req.params._id=="new"){
+        res.render('newAgentModal');
+    }else{
+        agentservice.findByGuid(req.params._id, function (result) {
+            res.render('agentModal',{data:result});
+        })
+    }
+});
+
 router.post('/updateUser/:_id',filter.authorize, function (req, res, next) {
     if(req.params._id == "new"){
         userservice.insertUser(req.body.username,req.body.password,req.body.name,req.body.admin,req.body.desc,function(result){
@@ -59,7 +86,7 @@ router.post('/updateUser/:_id',filter.authorize, function (req, res, next) {
         })
     }else{
         userservice.updateUserByGuid(req.params._id,req.body.username,req.body.password,req.body.name,req.body.admin,req.body.desc,function(result){
-            if(result > 0){
+            if(result){
                 res.send({'success': true});
             }else{
                 res.send({'success': false});
@@ -68,4 +95,23 @@ router.post('/updateUser/:_id',filter.authorize, function (req, res, next) {
     }
 });
 
+router.post('/updateAgent/:_id',filter.authorize, function (req, res, next) {
+    if(req.params._id == "new"){
+        agentservice.insertAgent(req.body.name,req.body.sex,req.body.phone,req.body.tel,req.body.desc,function(result){
+            if(result){
+                res.send({'success': true});
+            }else{
+                res.send({'success': false});
+            }
+        })
+    }else{
+        agentservice.updateAgentByGuid(req.params._id,req.body.name,req.body.sex,req.body.phone,req.body.tel,req.body.desc,function(result){
+            if(result){
+                res.send({'success': true});
+            }else{
+                res.send({'success': false});
+            }
+        })
+    }
+});
 module.exports = router;

@@ -7,7 +7,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var multiparty=require("connect-multiparty");
 var session = require("express-session");
-
 global.moment = require('moment');
 
 //var routes = require('./routes/index');

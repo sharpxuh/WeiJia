@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
  <!-- Bootstrap Core CSS -->
     <link href="/startbootstrap-sb-admin-2-1.0.5/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -13,6 +14,18 @@
 color:white;
 background-color:#D00000;
 }
+#gallery{
+    border:0;
+    margin:0;
+    padding:0;
+    max-width:900px;
+    width:expression(this.width>900px?"900px":this.width);
+    width:expression(this.width<900px?"900px":this.width);
+    max-height:400px;
+    height:expression(this.height>400px?"400px":this.height);
+    height:expression(this.height<400px?"400px":this.height);
+    overflow:hidden;
+}
 </style>
 <head>
     <meta charset="UTF-8">
@@ -21,51 +34,54 @@ background-color:#D00000;
 <body>
     <div data-role="page" id="detailHouse">
        <header data-role="header" data-theme="f">
-       <a href="#" data-role="button" data-rel="back" data-icon="back" data-iconpos="notext">返回</a>
+       <a href="#" data-role="button" data-rel="back" data-icon="back">返回</a>
                <h1><%=data[0].title%></h1>
        </header>
        <div data-role="content" >
-         <div  style="text-align :center">
-            <img src="/images/01.jpg" alt="image" id="gallery">
+         <div  style="text-align :center" >
+            <img src="/upload/<%=(data[0].photourl).split(";")[0]%>" alt="image" id="gallery" onerror="this.src='/images/b.jpg'">
          </div>
          <p></p>
-         <div class="ui-grid-d">
+         <div class="ui-grid-b">
                       <div class="ui-block-a">标题:<%=data[0].title%></div>
-                      <div class="ui-block-b"> </div>
-                      <div class="ui-block-c"> </div>
-                      <div class="ui-block-d"> </div>
-                      <div class="ui-block-e"></div>
+                      <div class="ui-block-b"></div>
+                      <div class="ui-block-c" style="width:30%">
+                            <a href="#" data-role="button">预约</a>
+                      </div>
          </div>
          <p></p>
-         <div class="ui-grid-d">
-             <div class="ui-block-a">发布日期:<%=data[0].startdate%></div>
-             <div class="ui-block-b"> </div>
-             <div class="ui-block-c"> </div>
-             <div class="ui-block-d"> </div>
-             <div class="ui-block-e" style="width:10%">
-                 <a href="#" data-role="button">预约</a>
-             </div>
+         <div>
+             <div>发布日期:<%=data[0].startdate%></div>
          </div>
          <p></p>
-         <div class="ui-grid-d">
+         <div class="ui-grid-b">
                       <div class="ui-block-a">价格:<%=data[0].price%></div>
                       <div class="ui-block-b"> </div>
-                      <div class="ui-block-c"> </div>
-                      <div class="ui-block-d"> </div>
-                      <div class="ui-block-e"></div>
+                       <div class="ui-block-c">
+                       </div>
          </div>
          <p></p>
-         <div class="ui-grid-d">
+         <div class="ui-grid-c">
                       <div class="ui-block-a">楼层:<%=data[0].floor%></div>
                       <div class="ui-block-b">面积:<%=data[0].area%> </div>
                       <div class="ui-block-c">朝向:<%=data[0].forward%> </div>
                       <div class="ui-block-d">年代:<%=data[0].createyear%> </div>
-                      <div class="ui-block-e"></div>
          </div>
          <p></p>
          <div>
-             <div class="ui-grid-b">
-                                  <div class="ui-block-a">详细描述:<%=data[0].desc%></div>
+                                  <div >详细描述:<%=data[0].desc%></div>
+         </div>
+         </br>
+         <div>
+                经理人：
+         </div>
+         <br/>
+         <div>
+                 <img src="/images/a.jpg" style="float:left;width:80px;height:80px" />
+                    <div style="float:left;margin-left:6px">
+                        <p><%=data[0].agent.name%><p>
+                        <%=data[0].agent.tel%>/<%=data[0].agent.phone%>
+                    </div>
          </div>
 	   </div>
 	</div>
@@ -74,13 +90,15 @@ background-color:#D00000;
     <script type="text/javascript">
         $( '#gallery' ).click( function( e ) {
         	e.preventDefault();
-        	$.swipebox( [
-        		{ href:'/images/01.jpg', title:'My Caption' },
-        		{ href:'/images/02.jpg', title:'My Second Caption' },
-        		{ href:'/images/02.jpg', title:'My Second Caption' },
-        		{ href:'/images/02.jpg', title:'My Second Caption' }
-        	] );
-        } );
+        	var photourl =("<%=data[0].photourl%>").split(";");
+        	var msg = [];
+            $.each(photourl,function(){
+                if(this!=""){
+                     msg.push({ href:'/upload/'+this,title:'' })
+                }
+            })
+        	$.swipebox(msg);
+        });
         jQuery(function($) {
             $(".swipebox").swipebox({
                 useCSS : true,
@@ -89,6 +107,4 @@ background-color:#D00000;
         });
     </script>
 </body>
-
-
 </html>
