@@ -25,6 +25,26 @@ exports.findByIsRent = function(isRent,callback){
     })
 };
 
+exports.findByQuery = function(isRent,price,area,fitment,callback){
+    house.findAll({
+        where:{
+            isRent:isRent,
+            price:price,
+            status:'1'
+        },
+        include: [
+            agent,
+            typelist
+        ],
+        order:[['createtime', 'DESC']]
+    }).then(function(data){
+        callback(data);
+    }).catch(function(error){
+        console.log(error);
+    })
+};
+
+
 //exports.deleteByGuid = function(guid,callback){
 //    house.destroy({
 //        where: {
@@ -108,3 +128,4 @@ exports.insertHouse = function(isrent,isin,title,price,createyear,region,agentid
         console.log(error);
     })
 }
+
