@@ -23,26 +23,36 @@ background-color:#D00000;
     <article data-role="content">
     <div class="ui-grid-b">
                   <div class="ui-block-a">
+                    <%if(rent==true){%>
                     <select name="price" id="price">
-                        <option value="">价格</option>
+                        <option value=" " selected="selected">价格</option>
                         <option value="0">3000以下</option>
                         <option value="1">3000以上</option>
                     </select>
+                    <%}%>
+                     <%if(rent==false){%>
+                                        <select name="price" id="price">
+                                            <option value=" " selected="selected">价格</option>
+                                            <option value="0">100万以下</option>
+                                            <option value="1">100万以上</option>
+                                        </select>
+                                        <%}%>
                   </div>
                   <div class="ui-block-b">
                     <select name="area" id="area">
-                        <option value="">户型</option>
+                        <option value=" " selected="selected">面积</option>
                         <option value="0">75以下</option>
                         <option value="1">75~100平</option>
                         <option value="2">100平以上</option>
                     </select>
                   </div>
                   <div class="ui-block-c">
-                    <select name="region" id="region">
-                        <option value="">区域</option>
-                        <option value="0">工业园区</option>
-                        <option value="1">相城区</option>
-                        <option value="2">姑苏区</option>
+                    <select name="fitment" id="fitment">
+                        <option value=" " selected="selected">装修</option>
+                        <option value="0">毛坯</option>
+                        <option value="1">简装</option>
+                        <option value="2">精装</option>
+                        <option value="3">豪华装修</option>
                     </select>
                   </div>
                 </div>
@@ -73,6 +83,15 @@ background-color:#D00000;
         function houseDetail(guid){
             window.location = "/mobile/detailHouse/"+guid;
         }
+
+        $("select").change(function(){
+            var price = $("#price").val();
+            var area = $("area").val();
+            var fitment = $("fitment").val();
+            var rent = <%=rent%>;
+            location.href="/mobile/query?price="+price+"&area="+area+"&fitment="+fitment+"&rent="+rent;
+        })
+
     </script>
 </body>
 

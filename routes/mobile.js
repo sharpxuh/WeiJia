@@ -21,6 +21,35 @@ router.get('/second',function(req,res,next){
     })
 });
 
+router.get('/query',function(req,res,next){
+    var area="",price="",fitment="";
+    if(req.query.price!="undefined"){
+        price= req.query.price;
+    }
+    if(req.query.area!="undefined"){
+        price= req.query.area;
+    }
+    if(req.query.fitment!="undefined"){
+        price= req.query.fitment;
+    }
+    if(req.query.rent=="true"){
+        if(price=="0"){
+            price={$lt: 3000};
+        }
+        if(price=="1"){
+            price={$gte: 3000};
+        }
+        houseservice.findByQuery("1",price,area,fitment, function (result) {
+            res.render('mobileHouses', {data: result,rent: true});
+        })
+    }
+    if(req.query.rent=="false"){
+        houseservice.findByQuery("0",price,area,fitment, function (result) {
+            res.render('mobileHouses', {data: result,rent: false});
+        })
+    }
+
+});
 
 
 router.get('/detailHouse/:_id', function (req, res, next) {
@@ -107,3 +136,4 @@ router.post('/upload',function(req,res,next){
 });
 
 module.exports = router;
+
