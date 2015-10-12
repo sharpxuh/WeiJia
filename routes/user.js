@@ -122,7 +122,7 @@ router.get('/recruit',filter.authorize,function(req,res,next){
 });
 
 router.post('/updateRecruit/:_id',filter.authorize, function (req, res, next) {
-        userservice.updateRecruitByGuid(req.params._id,req.query.duty,req.query.require,req.query.number,function(result){
+        userservice.updateRecruitByGuid(req.params._id,req.query.duty,req.query.require,req.query.number,req.query.email,req.query.tel,function(result){
             if(result){
                 res.send({'success': true});
             }else{

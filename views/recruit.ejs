@@ -76,9 +76,6 @@
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
-                    <li>
-                        <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                    </li>
                     <%if(user[0].role == '1'){%>
                     <li>
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> 用户管理<span class="fa arrow"></span></a>
@@ -112,10 +109,10 @@
                                 <a href="#">租赁房预约<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
                                     <li>
-                                        <a href="/order/rent/in">租入</a>
+                                        <a href="/order/rent/in">我要租房</a>
                                     </li>
                                     <li>
-                                        <a href="/order/rent/out">租出</a>
+                                        <a href="/order/rent/out">我要出租</a>
                                     </li>
                                 </ul>
                                 <!-- /.nav-third-level -->
@@ -124,10 +121,10 @@
                                 <a href="#">二手房房预约<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
                                     <li>
-                                        <a href="/order/second/in">买入</a>
+                                        <a href="/order/second/in">我要买房</a>
                                     </li>
                                     <li>
-                                        <a href="/order/second/out">卖出</a>
+                                        <a href="/order/second/out">我要卖房</a>
                                     </li>
                                 </ul>
                                 <!-- /.nav-third-level -->
@@ -136,7 +133,7 @@
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="index.html"><i class="fa fa-graduation-cap fa-fw"></i> 招聘信息</a>
+                        <a href="/user/recruit"><i class="fa fa-graduation-cap fa-fw"></i> 招聘信息</a>
                     </li>
                 </ul>
             </div>
@@ -165,8 +162,12 @@
                         <input class="form-control" value='<%=data[0].number%>' id="number">
                     </div>
                     <div class="form-group">
-                         <label>联系方式:</label>
-                         <label>519360550@qq.com
+                         <label>投职简历邮箱:</label>
+                         <input class="form-control" value='<%=data[0].email%>' id="email">
+                     </div>
+                     <div class="form-group">
+                            <label>联系电话:</label>
+                            <input class="form-control" value='<%=data[0].tel%>' id="tel">
                      </div>
                     <br/>
                     <button type="button" class="btn btn-success" onclick="recruitSubmit('<%=data[0].guid%>')">确定</button>&nbsp;&nbsp;&nbsp;
@@ -202,7 +203,7 @@
         function recruitSubmit(guid){
             $.ajax({
                 type: "POST",
-                url: "/user/updateRecruit/"+guid+"?duty="+$("#duty").val()+"&require="+$("#require").val()+"&number="+$("#number").val(),
+                url: "/user/updateRecruit/"+guid+"?duty="+$("#duty").val()+"&require="+$("#require").val()+"&number="+$("#number").val()+"&email="+$("#email").val()+"&tel="+$("#tel").val(),
                 success: function(data){
                     if(data.success==true){
                         alert("操作成功！");

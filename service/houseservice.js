@@ -29,7 +29,9 @@ exports.findByQuery = function(isRent,price,area,fitment,callback){
     house.findAll({
         where:{
             isRent:isRent,
-            price:price,
+            price:price==''?{$gt: 0}:price,
+            area:area==''?{$gt: 0}:area,
+            fitment:fitment==''?{$like: '%'}:fitment,
             status:'1'
         },
         include: [
@@ -128,4 +130,6 @@ exports.insertHouse = function(isrent,isin,title,price,createyear,region,agentid
         console.log(error);
     })
 }
+
+
 

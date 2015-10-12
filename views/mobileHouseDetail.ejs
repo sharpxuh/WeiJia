@@ -29,7 +29,7 @@ background-color:#D00000;
 </style>
 <head>
     <meta charset="UTF-8">
-    <title>ListAPP</title>
+    <title>唯佳房产</title>
 </head>
 <body>
     <div data-role="page" id="detailHouse">
@@ -82,9 +82,15 @@ background-color:#D00000;
          </div>
          <br/>
          <div>
-                 <img src="/images/a.jpg" style="float:left;width:80px;height:80px" />
-                    <div style="float:left;margin-left:6px">
+                <%if(data[0].agent.sex == '0'){%>
+                 <img src="/images/female.jpg" style="float:left;width:80px;height:80px" />
+                <%}%>
+                <%if(data[0].agent.sex == '1'){%>
+                                 <img src="/images/male.jpg" style="float:left;width:80px;height:80px" />
+                <%}%>
+                    <div style="float:left;margin-left:10px">
                         <p><%=data[0].agent.name%><p>
+                        <br/>
                         <%=data[0].agent.tel%>/<%=data[0].agent.phone%>
                     </div>
          </div>

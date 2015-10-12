@@ -8,7 +8,9 @@ var recruit = sequelize.define("recruit",{
     guid:{type:Sequelize.UUID,primaryKey:true,defaultValue:Sequelize.UUIDV4},
     duty:Sequelize.STRING(400),
     require:Sequelize.STRING(400),
-    number:Sequelize.STRING(10),
+    email:Sequelize.STRING(40),
+    tel:Sequelize.STRING(40),
+    number:Sequelize.STRING(10)
 },{
     timestamps: false,
     freezeTableName: true

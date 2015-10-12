@@ -13,7 +13,7 @@
 </style>
 <head>
     <meta charset="UTF-8">
-    <title>人才招聘</title>
+    <title>唯佳房产</title>
 </head>
 <body>
 <div data-role="page" id="photos">
@@ -22,18 +22,30 @@
     </header>
     <div data-role="content">
     <p>
-            <b><div style="float:left;width:20%">工作职责:</div></b>
-            <div style="float:left">负责网站各板块内容的规划和各频道栏目内容督导，部门工作管理。</div>
+            <b><div style="float:left;width:30%">工作职责:</div></b>
+            <div style="float:left"><%=data[0].duty%></div>
     </p>
+    <br/>
     <p>
-        <b><div style="float:left;width:20%">招聘要求:</div></b>
-        <div style="float:left">1、本科以上学历，专业不限，精通体育，及互联网。
-                                          2、三年以上电视、报刊、新闻媒体相关职位工作经验，熟悉网络媒体。具备较强的文字组织能力和原创编写能力，具丰富的团队管理经验、频道栏目策划能力。</div>
-    </p>
+        <b><div <div style="float:left;width:30%">招聘要求:</div></b>
+        <div style="float:left"><%=data[0].require%></div>
+        </p>
+        </br>
     <p>
-            <b><div style="float:left;width:20%">招聘人数:</div></b>
-            <div style="float:left">10</div>
+            <b><div style="float:left;width:30%">招聘人数:</div></b>
+            <div style="float:left"><%=data[0].number%></div>
     </p>
+    <br/>
+     <p>
+                <b><div style="float:left;width:30%">简历邮箱:</div></b>
+                <div style="float:left"><%=data[0].email%></div>
+        </p>
+        <br/>
+        <p>
+                        <b><div style="float:left;width:30%">联系电话:</div></b>
+                        <div style="float:left"><%=data[0].tel%></div>
+        </p>
+        <br/>
     </div>
 
 </div>

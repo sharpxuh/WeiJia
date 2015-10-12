@@ -79,11 +79,13 @@ exports.findRecruit = function (callback){
     })
 };
 
-exports.updateRecruitByGuid = function(guid,duty,require,number,callback){
+exports.updateRecruitByGuid = function(guid,duty,require,number,email,tel,callback){
     recruit.update({
         duty: duty,
         require:require,
-        number: number
+        number: number,
+        email:email,
+        tel:tel,
     }, {
         where: {
             guid: guid
