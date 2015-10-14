@@ -87,9 +87,10 @@ exports.findByGuid = function(guid,callback){
         where:{
             guid:guid,
         },
-        include: [{
-            model: agent
-        }]
+        include: [
+            agent,
+            typelist
+        ],
     }).then(function(data){
         callback(data);
     }).catch(function(error){

@@ -12,8 +12,6 @@ exports.findAll = function (callback){
         if(callback){
             callback(data);
         }
-    }).catch(function(error){
-        console.log(error);
     })
 };
 
@@ -61,4 +59,16 @@ exports.updateAgentByGuid = function(guid,name,sex,phone,tel,desc,callback){
     }).catch(function(error){
         console.log(error);
     })
-}
+};
+
+exports.updatePhotourl = function(guid,photourl,callback){
+    agent.update({
+        photourl:photourl
+    },{
+        where: {
+            guid: guid
+        }
+    }).then(function(data){
+        callback(data);
+    });
+};

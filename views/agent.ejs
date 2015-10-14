@@ -162,6 +162,7 @@
                                     <th>移动电话</th>
                                     <th>固定电话</th>
                                     <th>描述</th>
+                                    <th>头像</th>
                                     <th style="text-align: center">操作</th>
                                 </tr>
                                 </thead>
@@ -174,6 +175,7 @@
                                     <td><%= data[i].phone %></td>
                                     <td><%= data[i].tel %></td>
                                     <td><%= data[i].desc %></td>
+                                    <td><img src="/images/<%=data[i].photourl%>" style="width:50px;height:50px" onerror="this.src='/images/female.jpg'"></td>
                                     <td style="text-align: center">
                                         <button type="button" class="btn btn-danger"
                                                 onClick="deleteAgent('<%=data[i].guid%>')">删除
@@ -181,6 +183,7 @@
                                         <button type="button" class="btn btn-success"
                                                 onclick="show('<%=data[i].guid%>')">修改
                                         </button>
+                                        <button type="file" class="btn btn-warning" onClick="upload('<%=data[i].guid%>')" >上传头像</button>
                                     </td>
                                 </tr>
                                 <%}%>
@@ -210,6 +213,14 @@
 
         <!-- /#page-wrapper -->
 
+         <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+                 aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+
     </div>
     <!-- /#wrapper -->
 </div>
@@ -230,6 +241,7 @@
 <!-- Custom Theme JavaScript -->
 <script src="/startbootstrap-sb-admin-2-1.0.5/dist/js/sb-admin-2.js"></script>
 
+<script src="/javascripts/jquery-form.js"></script>
 <!-- Page-Level Demo Scripts - Tables - Use for reference -->
 <script>
     $(document).ready(function () {
@@ -278,7 +290,28 @@
             }
         });
     }
-    ;
+
+    function upload(guid){
+                    $('#myModal').modal({remote:'/user/upload/'+guid,backdrop:false}).on("hidden.bs.modal", function () {
+                        $(this).removeData("bs.modal");
+                    });
+                }
+
+     function uploadFiles(guid){
+                    $("#uploadForm").ajaxSubmit({
+                        url : "/user/uploadfiles/"+guid, // 请求的url
+                        type : "post", // 请求方式
+                        dataType : "json",
+                        success : function(data){
+                            alert("上传成功！");
+                            $('#myModal').modal('hide');
+                             window.location.reload();
+                        },
+                        error : function(){
+                            alert("数据加载失败！");
+                        }
+                    })
+                    }
 </script>
 </body>
 

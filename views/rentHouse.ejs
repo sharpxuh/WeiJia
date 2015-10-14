@@ -278,21 +278,7 @@
                 });
             }
 
-            function uploadFiles(guid){
-                $("#uploadForm").ajaxSubmit({
-                    url : "/house/uploadfiles/"+guid, // 请求的url
-                    type : "post", // 请求方式
-                    dataType : "json",
-                    success : function(data){
-                        alert("上传成功！");
-                        $('#myModal').modal('hide');
-                         window.location.reload();
-                    },
-                    error : function(){
-                        alert("数据加载失败！");
-                    }
-                })
-                }
+
 
                 function editHouse(guid){
                     $('#myModal').modal({remote:'/house/detailHouse/'+guid,backdrop:false}).on("hidden.bs.modal", function () {

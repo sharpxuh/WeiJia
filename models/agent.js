@@ -12,6 +12,7 @@ var agent = sequelize.define("agents",{
     phone:Sequelize.STRING(20),
     desc:Sequelize.STRING(200),
     tel:Sequelize.STRING(20),
+    photourl:Sequelize.STRING(100)
 },{
     timestamps: false,
     freezeTableName: true
