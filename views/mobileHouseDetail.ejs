@@ -13,6 +13,7 @@
 {
 color:white;
 background-color:#D00000;
+text-shadow:none;
 }
 #gallery{
     border:0;
@@ -42,10 +43,12 @@ background-color:#D00000;
             <img src="/upload/<%=(data[0].photourl).split(";")[0]%>" alt="image" style="max-width:100%;overflow:hidden;"  id="gallery" onerror="this.src='/images/b.jpg'">
          </div>
          <p></p>
-         <div class="ui-grid-b">
-                      <div class="ui-block-a">标题:<%=data[0].title%></div>
-                      <div class="ui-block-b"></div>
-                      <div class="ui-block-c" style="width:30%">
+         <div>标题:<%=data[0].title%></div>
+         <div class="ui-grid-c">
+                      <div class="ui-block-a"> </div>
+                      <div class="ui-block-b"> </div>
+                      <div class="ui-block-c"> </div>
+                      <div class="ui-block-d" style="width:25%;height:15%">
                             <% if(data[0].isRent==0){%>
                             <a href="/mobile/sellIn" data-role="button">预约</a>
                             <%}%>
@@ -54,20 +57,19 @@ background-color:#D00000;
                             <%}%>
                       </div>
          </div>
-         <p></p>
          <div>
-             <div>发布日期:<%=data[0].startdate%></div>
+             <div>发布日期:<%=data[0].createtime%></div>
          </div>
          <p></p>
          <div class="ui-grid-a">
-                      <div class="ui-block-a">价格:<%=data[0].price%></div>
+                      <div class="ui-block-a">价格:<%=data[0].price%><% if(data[0].isRent==0){%>万<%}%><% if(data[0].isRent==1){%>元<%}%></div>
                       <div class="ui-block-b">户型：<%=data[0].typelist.label%> </div>
          </div>
          <p></p>
          <div class="ui-grid-c">
-                      <div class="ui-block-a">楼层:<%=data[0].floor%></div>
-                      <div class="ui-block-b">面积:<%=data[0].area%> </div>
-                      <div class="ui-block-c">朝向:<%=data[0].forward%> </div>
+                      <div class="ui-block-a">楼层:<%=data[0].floor%>层</div>
+                      <div class="ui-block-b">面积:<%=data[0].area%>平</div>
+                      <div class="ui-block-c">朝向:<%if(data[0].forward=="0"){%>南北<%}%><%if(data[0].forward=="1"){%>非南北<%}%> </div>
                       <div class="ui-block-d">年代:<%=data[0].createyear%> </div>
          </div>
          <p></p>
